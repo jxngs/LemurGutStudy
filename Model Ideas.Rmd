@@ -1,0 +1,262 @@
+---
+title: "Questions & Model Ideas"
+output: pdf_document
+classoption: twocolumn
+date: "2023-09-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Initial Model Ideas
+
+We talked about breaking time of days into 3 buckets: 6-10 AM (morning), 10AM - 2PM (noon), 2 - 6:10PM (afternoon, latest is 18:10), since EDA for three response statistics have different vals in these three buckets
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(chron)
+library(data.table)
+
+
+# join dataframes
+df <- metadata |>
+  left_join(evenness, join_by(SampleID == ...1)) |>
+  left_join(richness, join_by(SampleID == ...1)) |>
+  left_join(faith, join_by(SampleID == `#SampleID`)) |>
+  left_join(t_relab, join_by(SampleID == ID))
+
+# convert numeric time values to xx:xx format
+df$time.converted <- sprintf("%02d:%02d",
+                            df$Sampline.time %/% 100,
+                            df$Sampline.time %% 100)
+
+df <- df %>% 
+  mutate(hour_measured = Sampline.time %/% 100) %>%
+  mutate(minute_measured = Sampline.time %% 100) %>%
+  mutate(minutes_after_6am = (hour_measured-6)*60 + minute_measured)
+
+range(df$Sampline.time)
+```
+
+It's known that microbiomes are shaped by species, Group, Animal.ID, and now we are interested in figuring time.of.day significance of microbiome summary statistics.
+
+```{r}
+ggplot(df, aes(y = shannon_entropy, x = species)) +
+  geom_boxplot()
+```
+
+```{r}
+#Picking interested variables right now
+shit <- df %>% 
+  select(SampleID, species, Animal.ID, NHE, Group, season, Sampling.date, AMPM, Sampline.time, shannon_entropy, observed_features, faith_pd, minutes_after_6am)
+```
+
+## Base Model: Species, Social group and individual lemur
+
+Since the researcher has already determined microbiomes will be shaped by species, social group and individual identity of lemur, we could start by building a model containing these three variables. For our response variable, we will start by using 3 markers of alpha diversity of microbiome in feces collected and treating them seperately
+
+-   observed_features: the number of microbial taxa of the fecal sample
+
+-   shannon_index: measures the microbial evenness of the sample
+
+-   faith: Faith's Phylogenetic Diversity" measures the phylogenetic breadth of sample
+
+Among the three predictors, we can treat individual identity of lemur (Animal.ID) as a random effect term towards the response variable; species (species) and group (Group) can be treated as fixed effects on interest. To build up a base model, we can specify the model form:
+
+$$Y_{ij} = a_i + b_i*Group + \epsilon_{ij} \\
+a_i = \alpha_0 + ui \\
+b_i = \beta_0 + vi \\
+\epsilon_{ij} \sim~N(0, \sigma^2)$$
+
+Here we choose to only incorporate species as the fixed effect, since species and Group variables are correlated (three social groups, Beatrice, Gertrude and Gisela belong are P coquereli lemurs while Alena, Sophia and Brigitta belong to L. catta species), and incoporating a two-level species will make our model output look cleaner, especially after when we expand the model and add more fixed effects terms. In the model, $a_i$ indicates the random effect from each individual, with $\alpha_0$ being the mean for the reference species and the reference group, and $\beta_0$ being the change towards the mean for the specific level group, compared to the reference group. $\sigma^2$ refers to the within-individual-lemur variance, while between-lemur variance is broken down into ui, vi. In addition, ui, vi are assumed, by convention, to have a bivariate normal distribution, with each centered around 0 and has its own variance and covariance.
+
+#### Model Output
+
+We start by building the model on three markers (our response):
+
+```{r}
+library(lme4)
+
+model.shannon.a <- lmer(shannon_entropy ~ species + (1 + species | Animal.ID), data = shit)
+
+model.features.a <- lmer(observed_features ~ species + (1 + species | Animal.ID), data = shit)
+
+model.faith.a <- lmer(faith_pd ~ species + (1 + species | Animal.ID), data = shit)
+```
+
+```{r}
+coef(summary(model.shannon.a))
+coef(summary(model.features.a))
+coef(summary(model.faith.a))
+```
+
+Here we display all the fixed effects coefficients, and their t values associated. The base level species is chosen to be L. catta. We can see that for both observed_features and faith, the species fixed effects have significant t values to suggest that species are an influential factor in the fecal microbiome composition; the distinction is less significant in shannon entropy index.
+
+## Adding Other Covariates: Seasons and AMPM
+
+One of our main research question is whether different times of day and different seasons will have an effect on the response variable. To answer this question, we decide to incorporate seasons and AMPM as additional predictors in our mixed model
+
+The data was collected in two seasons, in spring and summer, and we will keep the two levels as it is. The AMPM variable indicates whether sample was collected in AM (6AM - 12PM) or PM (12PM - 18PM). For our new model, we will add tAMPM and season as fixed effects, on top of our based model; Furthermore, we are interested to see that, if a difference exists, then would that difference is itself different between the two species of lemurs. That prompts us to add an interaction term in our mixed effect model.
+
+Our new model formula can be specified as:
+
+$Y_{ij} = a_i + b_i*\text{species} + c_i * \text{AMPM} + d_i * \text{season} + \epsilon_{ij} \\
+a_i = \alpha_0 + ui \\
+b_i = \beta_0 + vi \\
+c_i = c_0 + c_1*\text{species} + ki \\
+d_i = d_0 + d_1*\text{species} + qi \\
+\epsilon_{ij} \sim~N(0, \sigma^2)$
+
+#### Model Output
+
+```{r}
+model.shannon.b <- lmer(shannon_entropy ~ season + species + AMPM + species:AMPM + season:species + (season + species + AMPM | Animal.ID), data = shit)
+
+model.features.b <- lmer(observed_features ~ season + species + AMPM + species:AMPM + season:species + (season + species + AMPM | Animal.ID), data = shit)
+
+model.features.bb <- lmer(observed_features ~ season + species + minutes_after_6am + species:minutes_after_6am + season:species + (season + species + minutes_after_6am | Animal.ID/NHE), data = shit)
+
+model.faith.b <- lmer(faith_pd ~ season + species + AMPM + species:AMPM + season:species + (season + species + AMPM | Animal.ID), data = shit)
+```
+
+#### Model Interpretation
+
+We will interpret the shannon entropy model in details and point out only the significant results in observed features and faith model, as they are interpreted similarly. For our model with observed features as response variable, we recognized that the model would yield that gives trailing digits whereas the response variables are integers-only. For the purpose of understanding trends of associations between explanatory variables of interests and the response variables, we believe it is still informative to interpret the estimated model coefficients.
+
+First we begin with fixed effect estimates for shannon model:
+
+```{r}
+summary(model.shannon.b)
+
+y_obs <- df$shannon_entropy
+y_pred <- predict(model.shannon.b)
+
+r2 <- cor(y_obs, y_pred)^2
+r2
+```
+
+```{r}
+summary(model.features.bb)
+
+y_obs <- df$observed_features
+y_pred <- predict(model.features.bb)
+
+r2 <- cor(y_obs, y_pred)^2
+r2
+
+performance::check_model(model.features.b)
+```
+
+```{r}
+summary(model.faith.b)
+
+y_obs <- df$faith_pd
+y_pred <- predict(model.faith.b)
+
+r2 <- cor(y_obs, y_pred)^2
+r2
+```
+
+```{r}
+summary(model.features.b)
+
+y_obs <- df$observed_features
+y_pred <- predict(model.features.b)
+
+r2 <- cor(y_obs, y_pred)^2
+r2
+```
+
+-   $\hat{\alpha_0} = 6.42$: The estimated shannon entropy mean for L.catta species in the spring measured during AM is 6.48
+
+-   $\hat{\beta_0} = 0.02$: The estimated shannon entropy is 0.02 higher on average for P. coquereli than L. catta, after controlling for time of day and season.
+
+-   $\hat{c_0} = -0.15$: The estimated shannon entropy is 0.15 on average lower in PM than AM, after controlling for species and season.
+
+-   $\hat{d_0} = 0.25$: The estimated shannon entropy for L. catta is on average 0.14 higher in summer than in spring, after controlling for time of day
+
+-   $\hat{c_1} = 0.11$: For P. coquereli species, the estimated shannon entropy is 0.11 higher when measured in PM than AM, after controlling for season. In other words, the estimated shannon entropy measured in PM for P. coquereli is on average $|0.025 + 0.116 - 0.15| = 0.01$ lower than the shannon entropy measured in PM for L. catta, controlling for season.
+
+-   $\hat{d_1} = -0.1$: For P.coquereli species, the estimated shannon entropy is 0,1 lower when measured in summer, after controlling for time of day. This means that, on average, the estimated shannon entropy measured in summer for P.coquereli is $|0.025 + 0.25 - 0.1| = 0.17$ higher than the shannon entropy measured in summer for L. catta, controlling for time of day.
+
+In our model with observed features as response variable, we noticed this interesting coefficient sign change copmared to the shannon entropy model:
+
+-   $\hat{\beta_0} = -12.28$: The estimated observed features is 12.28 lower on average for P. coquereli than L. catta, after controlling for time of day and season.
+
+In our model with Faith's PD as the response variable, we noticed these interesting coeffcient sign changes compared to the shannon entropy model:
+
+-   $\hat{\beta_0} = -2.37$: The estimated Faith's PD is 2.37 lower on average for P. coquereli than L. catta, after controlling for time of day and season.
+
+-   $\hat{c_0} = 0.28$: The estimated Faith's PD is 0.28 on average higher in PM than AM, after controlling for species and season.
+
+-   $\hat{c_1} = -0.28$: For P. coquereli species, the estimated Faith's PD is 0.28 lower when measured in PM than AM, after controlling for season, which is similar in terms of magnitude to the association described by $\hat{c_0}$. In other words, the estimated Faith's PD measured in PM for P. coquereli is on average $|-2.37 + 0.28 - 0.28| = 2.37$ lower than the Faith's PD measured in PM for L. catta, controlling for season.
+
+### Limitations
+
+Diagnostics plots for our three model can be found in the appendix. Based on the plot where we graph residuals vs fitted value, there is no considerable sign of heteroscedasticity in both Shannon Entropy Model and Features Model. However, we did notice a slight fanning structure in the residual plot of Faith's PD Model.
+
+In terms of residual normality, although all three models have falling tails on both ends, there is no substantial deviation across all models.
+
+#### Model Comparison with Base Model
+
+Since our new models are nested model compared to our base model, which only includes species and individual lemur ID, we can use Chi-square difference test to see whether the new model performs significantly better than the base model:
+
+```{r}
+anova(model.shannon.b, model.shannon.a, test = 'Chisq')
+anova(model.features.b, model.features.a, test = 'Chisq')
+anova(model.faith.b, model.faith.a, test = 'Chisq')
+```
+
+Judging from the p-values, our new models for all three response variables perform significantly better than the base model. All the three new models experience significant drops in AIC, BIC and deviance (except for the new shannon entropy model, which actually experiences a slight increase in BIC). Considering that BIC also penalize for overly complicated models, this comparison suggests evidence that the models with predictors other than species may be better at capturing underlying relationships within our current dataset.
+
+```{r}
+library(performance)
+performance(model.shannon.b)
+performance(model.shannon.a)
+```
+
+#### asasAppendix - Model Diagnostics
+
+##### Residual Plots
+
+```{r}
+plot(model.shannon.b, 
+     xlab = "Fitted Value", 
+     ylab = "Residuals", 
+     main = "Residual Diagnostic Plot for Shannon Entropy Model")
+
+plot(model.faith.b, 
+     xlab = "Fitted Value", 
+     ylab = "Residuals", 
+     main = "Residual Diagnostic Plot for Faith's PD Model")
+
+plot(model.features.b, 
+     xlab = "Fitted Value", 
+     ylab = "Residuals", 
+     main = "Residual Diagnostic Plot for Observed Features Model")
+```
+
+##### QQ Plot
+
+```{r}
+qqnorm(resid(model.shannon.b), main = "QQ Plot for Shannon Entropy Model")
+qqline(resid(model.shannon.b))
+
+qqnorm(resid(model.features.b), main = "QQ Plot for Observed Features Model")
+qqline(resid(model.features.b))
+
+qqnorm(resid(model.faith.b), main = "QQ Plot for Faith's PD Model")
+qqline(resid(model.faith.b))
+```
+
+```{r}
+model.features.c <- lmer(observed_features ~ season + species + AMPM + species:AMPM + season:species + (season + species + AMPM | Animal.ID), data = shit)
+
+y_obs <- df$observed_features
+y_pred <- predict(model.features.c)
+
+r2 <- cor(y_obs, y_pred)^2
+r2
+```

@@ -1,0 +1,1154 @@
+---
+title: "Analyzing Variation in Lemur Gut Microbiome Data"
+output: pdf_document
+classoption: twocolumn
+date: "October 11th, 2023"
+geometry: margin = 1.3cm
+header-includes:
+- \usepackage{placeins}
+urlcolor: blue
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.pos = "!h")
+knitr::knit_hooks$set(plot = function(x, options)  {
+  paste0(knitr::hook_plot_tex(x, options), "\n\\FloatBarrier\n")
+})
+
+library(tidyverse)
+library(showtext)
+library(ggtext)
+library(ggridges)
+library(tseries)
+library(knitr)
+library(patchwork)
+library(kableExtra)
+
+df <- read_csv("data/lemurs.csv")
+font_add_google("DM Serif Display", "dm")
+showtext_auto()
+```
+
+```{r load-data, include=FALSE}
+source("clean.r",local = knitr::knit_global())
+```
+
+Lemurs are a broad family of primates containing many different diverse
+species. Due to their primate status, it is known that lemurs are very
+genetically similar to humans. According to the [American Museum of
+Natural
+History](https://www.amnh.org/exhibitions/permanent/human-origins/understanding-our-past/living-primates#:~:text=Humans%20are%20primates%E2%80%93a%20diverse%20group%20that%20includes%20some%20200%20species.&text=Monkeys%2C%20lemurs%20and%20apes%20are,related%2C%20they%20are%20genetically%20similar.),
+human DNA is, on average, 96% similar to our most distant primate
+relatives, of which lemurs are included. While lemurs aren't as similar
+to humans when compared to more close relatives like chimpanzees and
+bonobos, it is still generally believed that both the *Hominidae* family
+and the *Lemuroidea* family evolved from a common ancestor over the past
+50-60 million years. Because of this, lemurs have become an important
+species for biological research, and their biological patterns and
+physical characteristics can be used to find valuable inferences about
+the biology and evolution of humans. While human biology and taxonomy is
+out of the scope of this paper, this study aims to analyze lemur gut
+microbiome data and discover differences in gut microbiomes across
+species, social group, individual identity, time of day, day, and
+season.
+
+Specifically, we have a few research questions we would like to answer
+regarding this case study:
+
+- Accounting for gut microbiome patterns with respect to species and
+  identity, is there a significant difference in lemur gut microbiome
+  patterns depending on the time of day?
+
+- To what extent do lemur gut microbiome patterns vary across days
+  and/or seasons? What patterns can be accounted for by differences in
+  the time the observations were measured?
+
+- Out of all of the predictors, which are the most influential when it
+  comes to variation of lemur gut microbiome patterns?
+
+- Do gut microbiome pattern differences themselves differ between
+  ring-tailed lemurs and sifakas with drastically different
+  gastrointestinal systems?
+
+The data for this study was collected by a researcher from the institution. The
+data collected involves 293 different fecal samples from 12 lemurs at
+the Duke Lemur Center, of which 6 are ring-tailed lemurs and 6 are
+sifakas. The ring-tailed lemurs and sifakas were both evenly split
+across 3 different forest enclosures (2 ring-tailed and 2 sifakas per
+enclosure), and the lemurs' fecal samples were measured in pairs on 3
+consecutive days in both the spring and summer seasons. During the days
+where a lemur was observed, fecal samples were taken and recorded
+multiple times throughout the day. After cleaning all of the data, the
+final dataset leaves us with information about the lemur (name,
+enclosure, and species), the date and time the sample was taken, and 206
+measurements of various genomes and families from the bacteria domain.
+These bacterial measurements are measured as the overall proportion of
+the sample which contained said bacteria; we will analyze these
+differences in bacteria in the lemur fecal samples with respect to the
+aforementioned predictors of time of day, day, season, species, social
+group, and identity. The data also provided more general metrics about
+the microbial samples; specifically, we have three different response
+variables that our models will be fitted for. The first is the Shannon
+Entropy, which describes the microbial evenness of the sample; higher
+degrees of bacterial uniformity in the sample are associated with a
+higher Shannon Entropy. The next is Faith's Phylogenetic Diversity,
+which describes the overall diversity of the sample; this is similar,
+but not identical, to Shannon Entropy since more uniform samples are not
+necessarily more diverse. The last is the number of observed features in
+the sample, which simply details the number of different bacteria found
+in the sample. Using these three response variables, our models will
+attempt to discover which of our predictors have a relevant influence on
+the variation of lemur gut microbiome patterns.
+
+Studies have already been performed regarding microbial data of lemurs
+The
+[study](https://animalmicrobiome.biomedcentral.com/articles/10.1186/s42523-022-00176-x)
+found that lemur gut microbial data is sensitive to "multiple scales of
+environmental differences" and that "non-dietary factors govern some of
+the variability". While one of our goals is to affirm these findings and
+account for them in our own analysis, our main goal is to extend the
+existing knowledge of lemur gut microbiome variation to include factors
+related to time-series data.
+
+In this case study, we examine the known existing association between
+lemur gut microbiome bacterial distributions and taxonomic predictors in
+relation with the possible relevance of time of day, day, and season.
+This way, the significant associations of the time-related predictor
+variables can be evaluated while controlling for the known associations
+of other predictors used in the study. Below, we explore the data to
+find possible trends between various predictors and our three response
+variables and examine the most prevalent bacterial families found in
+both of the lemur species.
+
+\newpage
+
+# Exploratory Data Analysis
+
+Our analysis of lemur gut microbiomes centers around the three
+aforementioned diversity metrics: observed features, Shannon Entropy,
+and Faith's Phylogenetic Diversity. To help address our research
+questions, we are interested in seeing how factors such as species, time
+of day, season impact these diversity scores. We performed exploratory
+data analysis surrounding each of the three metrics to uncover initial
+insights. We were also interested in exploring the bacterial composition
+data; we perform exploratory data analysis on this as well.
+
+## Shannon Entropy
+
+```{r shan-ent, fig.cap = "Shannon Entropy Over Time by Season and Species. Green rectangle = AM, Pink rectangle = PM.", fig.asp = 0.5, fig.pos = "!h"}
+new <- c("spring" = "Spring", "summer" = "Summer")
+
+ggplot(data = df, mapping = aes(x = minutes_after_6am,
+                                y = shannon_entropy,
+                                color = species)) +
+  geom_rect(aes(xmin= 0, xmax = 360,
+                ymin = 5, ymax = 7.5),
+            fill = 'white', alpha = 0.01, color = "#A8D38D") +
+  geom_rect(aes(xmin= 360, xmax = 730,
+                ymin = 5, ymax = 7.5),
+            fill = 'white', alpha = 0.01, color = "#FFD1D1") +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se=F) +
+  facet_wrap(~season, labeller = labeller(season = new)) + 
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  labs(x = "Minutes after 6 AM",
+       y = "Shannon Entropy",
+       title = "",
+       color = "Species") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+
+```{r echo=F,  fig.cap = "Distributions of Shannon Entropy by Species", fig.pos = "!h"}
+ggplot(data = df, aes(
+  x = shannon_entropy,
+  y = species,
+  fill = factor(after_stat(quantile))
+)) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE
+  ) +
+  scale_fill_manual(values = c("#E7FFCE", "#D8FFB1", "#B6DA9F", "#A8D38D")) +
+  labs(title = "",
+       x = "Shannon Entropy") +
+  theme_ridges() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(hjust = 0.5), 
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    text = element_text(family = "dm")
+  )
+```
+
+**Figure 1** aims to visualize the effect of time of day, season, and
+species on Shannon Entropy score. The scatterplots show that, in
+general, scores from P. coquereli samples tend to be less variant (or
+more clustered) than L. catta scores. P. coquereli scores also seem to
+remain consistent throughout the day, while L. catta shows some peaks
+and valleys; interestingly, L. catta scores seem to be highest in the
+early morning during the spring, but lowest in the early morning during
+the summer. The most interesting insight perhaps comes from comparing
+the scores themselves; during the spring, P. coquereli scores tend to
+average higher throughout the day compared to L. catta, but this is
+reversed during the summer. This suggests there may be an association
+between season and Shannon Entropy.
+
+**Figure 2** hones in on the species-level, giving us more information
+on how Shannon Entropy is distributed among each lemur classification.
+Particularly, neither species boasts a normal distribution as both show
+notable left skews; the first quantile for each species both cover over
+60% of that species' range. Overall, L. catta scores skew higher (and
+have a higher median) than P. coquereli. However, this visualization
+supports the idea that Shannon Entropy in L. catta is more varied; P.
+coquereli scores are more heavily concentrated around their median of
+6.5.
+
+## Faith's Phylogenetic Diversity
+
+```{r faith-pd, fig.cap = "Phylogenetic Diversity Over Time by Season and Species. Green rectangle = AM, Pink rectangle = PM.", fig.asp = 0.5, fig.pos = "!h"}
+ggplot(data = df, mapping = aes(x = minutes_after_6am,
+                                y = faith_pd,
+                                color = species)) +
+  geom_rect(aes(xmin= 0, xmax = 360,
+                ymin = 8, ymax = 21),
+            fill = 'white', alpha = 0.01, color = "#A8D38D") +
+  geom_rect(aes(xmin= 360, xmax = 730,
+                ymin = 8, ymax = 21),
+            fill = 'white', alpha = 0.01, color = "#FFD1D1") +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se=F) +
+  facet_wrap(~season, labeller = labeller(season = new)) + 
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  labs(x = "Minutes after 6 AM",
+       y = "Phylogenetic Diversity",
+       title = "",
+       color = "Species") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+
+```{r fig.cap = "Distributions of Phylogenetic Diversity by Species", fig.pos = "!h"}
+ggplot(data = df, aes(
+  x = faith_pd,
+  y = species,
+  fill = factor(after_stat(quantile))
+)) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE
+  ) +
+  scale_fill_manual(values = c("#E7FFCE", "#D8FFB1", "#B6DA9F", "#A8D38D")) +
+  labs(title = "",
+       x = "Faith's Phylogenetic Diversity") +
+  theme_ridges() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(hjust = 0.5), 
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    text = element_text(family = "dm")
+  )
+```
+
+**Figure 3** aims to visualize the effect of time of day, season, and
+species on Faith's Phylogenetic Diversity score. Like for Shannon
+Entropy, the scatterplots show that, in general, scores from P.
+coquereli samples tend to be less variant (or more clustered) than L.
+catta scores. Scores from both species seem to remain consistent
+throughout the day, suggesting that there might not be a strong
+association between time of day and Faith PD score. There does not
+appear to be much of a seasonal difference either. However, there seems
+to be a clear distinction on the species level, with L. catta scores
+being consistently higher than P. coquereli scores by a notable margin.
+
+**Figure 4** focuses on species. Again, this supports the idea that
+Faith PD is more variant in L. catta, this time even more notably than
+for Shannon Entropy; the IQR for P. coquereli is smaller than the range
+of any quantile of L. catta. Unlike Shannon Entropy, the distributions
+for both species are approximately normal, with L. catta scores clearly
+skewing higher. EDA suggests an association exists between species and
+Faith PD.
+
+## Observed Features
+
+```{r obs-feat, fig.cap = "Observed Features Over Time by Season and Species. Green rectangle = AM, Pink rectangle = PM.", fig.asp = 0.5, fig.pos = "!h"}
+ggplot(data = df, mapping = aes(x = minutes_after_6am,
+                                y = observed_features,
+                                color = species)) +
+  geom_rect(aes(xmin= 0, xmax = 360,
+                ymin = 100, ymax = 350),
+            fill = 'white', alpha = 0.01, color = "#A8D38D") +
+  geom_rect(aes(xmin= 360, xmax = 730,
+                ymin = 100, ymax = 350),
+            fill = 'white', alpha = 0.01, color = "#FFD1D1") +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se=F) +
+  facet_wrap(~season, labeller = labeller(season = new)) + 
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  labs(x = "Minutes after 6 AM",
+       y = "Observed Features",
+       title = "",
+       color = "Species") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+
+```{r echo=F, fig.cap = "Distributions of Observed Features by Species", fig.pos = "!h"}
+ggplot(data = df, aes(
+  x = observed_features,
+  y = species,
+  fill = factor(after_stat(quantile))
+)) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE
+  ) +
+  scale_fill_manual(values = c("#E7FFCE", "#D8FFB1", "#B6DA9F", "#A8D38D")) +
+  labs(title = "",
+       x = "Number of Observed Features") +
+  theme_ridges() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(hjust = 0.5), 
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    text = element_text(family = "dm")
+  )
+```
+
+**Figure 5** aims to visualize the effect of time of day, season, and
+species on number of observed features. Like for Faith PD, the
+scatterplots show a clear distinction on the species level, with L.
+catta scores being consistently higher than P. coquereli scores
+throughout the day. However, unlike Faith PD, there also appears to be a
+clear association between season and score, particularly for L. catta
+lemurs; the difference in scores between the two species is notably
+exacerbates during the summer, with L. catta scores consistently
+reaching above 250, a value rarely seen in the spring. Time of day seems
+to have less clear of an association, but there are some patterns:
+namely, in the spring, both species see a gradual decline in score from
+the beginning of the day until the mid-afternoon when it begins to pick
+up again. In the summer, P. coquereli scores remain relatively
+consistent, while L. catta sees a gradual increase from the beginning of
+the day until soon after 9AM. However, these differences from time of
+day appear minimal and there does not seem to be a stark contrast in
+observed features in the AM versus the PM for either species.
+
+**Figure 6** focuses on species. Once again, the data for L. catta is
+more varied, with an IQR twice as large as that of P. coquereli. The
+distributions for both species are approximately normal, and, like Faith
+PD, scores for L. catta skew higher. However, this difference is not as
+pronounced as Faith PD.
+
+## Bacterial Composition
+
+```{r bacterial-comp-setup}
+# get family-level data for bacteria
+family_data <- df |>
+  pivot_longer(cols = contains("d__"), names_to = "Bacteria", values_to = "Value") |>
+  mutate(Family = str_extract(Bacteria, "(?<=f__)[^;]+")) |>
+  mutate(Family = if_else(is.na(Family), "Undefined", Family))
+
+# top 10% prevalence by family for each species
+catta_data <- family_data |>
+  filter(species == "L. catta") |>
+  group_by(SampleID, Family) |>
+  summarize(FamilySum = sum(as.numeric(Value))) |>
+  top_n(8) |>
+  ungroup() |>
+  count(Family) |>
+  mutate(PercInTop10Percent = n / nrow(df |> filter(species == "L. catta")),
+         Species = "L. catta") |>
+  arrange(desc(PercInTop10Percent))
+
+coquereli_data <- family_data |>
+  filter(species == "P. coquereli") |>
+  group_by(SampleID, Family) |>
+  summarize(FamilySum = sum(as.numeric(Value))) |>
+  top_n(8) |>
+  ungroup() |>
+  count(Family) |>
+  mutate(PercInTop10Percent = n / nrow(df |> filter(species == "P. coquereli")),
+         Species = "P. coquereli") |>
+  arrange(desc(PercInTop10Percent))
+
+# setup for visualization
+plot_order <- catta_data |>
+  full_join(coquereli_data, by = join_by(Family == Family)) |>
+  select(Family, PercInTop10Percent.x, PercInTop10Percent.y)
+
+plot_order[is.na(plot_order)] <- 0
+
+plot_order <- plot_order |>
+  mutate(Difference = abs(PercInTop10Percent.x - PercInTop10Percent.y)) |>
+  arrange(desc(Difference)) |>
+  slice(1:10)
+
+plot_order$Family = factor(plot_order$Family)
+plot_order$Family <-
+  reorder(plot_order$Family, plot_order$Difference)
+```
+
+```{r bacterial-comp-viz, fig.cap = "Top 10 families with the highest difference in prevalent appearance between species", fig.pos = "!h"}
+ggplot(data = plot_order) +
+  geom_point(
+    aes(
+      x = PercInTop10Percent.x,
+      y = Family,
+      color = "L. catta"
+      ),
+    size = 2.5
+    ) +
+  geom_point(
+    aes(
+      x = PercInTop10Percent.y,
+      y = Family,
+      color = "P. coquereli"
+      ),
+    size = 2.5
+    ) +
+  geom_segment(
+    aes(
+      x = PercInTop10Percent.x,
+      xend = PercInTop10Percent.y,
+      y = Family,
+      yend = Family
+    ),
+    color = "black"
+  ) +
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  scale_x_continuous(labels = scales::percent) +
+  labs(color = "Species", x = "Top 10% Prevalence") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"),
+        axis.text.y = element_text(size = 14))
+```
+
+We were particularly interested in bacteria that consistently appeared
+prevalently in one species but perhaps not the other to suggest which
+bacteria most distinguish L. catta gut microbiomes from P. coquereli gut
+microbiomes. To decrease the granularity of the data, we extracted the
+family of each bacteria, reducing the dimensionality to 80. We defined
+appearing prevalently as being in the top 10% of families in terms of
+microbial composition for each observation; therefore, we recorded the 8
+families with the highest values for each observation. We then
+calculated the percentage of time each family appeared prevalently in
+each species by dividing the number of times it was in the top 10% by
+the total amount of observations for that species. **Figure 7** displays
+the 10 families with the largest difference in prevalent appearance
+between P. coquereli and L. catta lemurs. We see that
+Succinivibrionaceae, Muribaculaceae, Spirochaetaceae,
+Erysipelatoclostridiaceae, and Bacteroidaceae are notably more prevalent
+in L. catta, with the latter being the singular family with the highest
+difference in prevalence between species. Rikenellaceae, Mongoglobaceae,
+Clostridia UCG-014, Clostridia VadinBB60, and Clostridiaceae are notably
+more prevalent in P. coquereli, the latter three all interestingly
+coming from the Clostridia class.
+
+# Methodology
+
+The first step of our methodology was evaluating various aspects of the
+data to see what models are appropriate. One of our main concerns about
+the data is the fact that the observations are not fully independent. It
+is highly likely that observations from the same lemur are highly
+correlated with one another. Furthermore, there are 6 lemurs of each
+species (ring-tailed and sifaka) and 3 different enclosures housing 4
+lemurs each. Lastly, all of the lemurs were observed at the same
+institution, so the lemurs experienced similar
+climate and weather (although that is out of the scope of this study).
+We know from previous studies that both environmental factors
+(enclosure) and biological factors (species and individual identity)
+have a significant association with lemur gut microbiome patterns, so we
+knew going into the study that the observations likely have some level
+of covariance with one another when it comes to predicting the response
+variables. Despite these independence violations, we elected to not run
+tests on them because the model we selected (described below) is
+designed to be robust for dependent observations.
+
+Another part of our data that we needed to consider is the fact that
+repeated measurements were conducted via a time series; for each lemur,
+we have many observations at different points in time, in both the
+spring and summer seasons. Prior to modeling, we were unaware if we
+could expect a significant difference in gut microbiome patterns of
+lemurs based on time of day, so we wanted to select a model that could
+analyze a possible association for time of day, day, and season of the
+measurement while accounting for the known existing sensitivities of
+microbiome patterns to biological and environmental factors.
+
+### Time Series
+
+To examine the time series data, we wanted to evaluate the general
+trends of the data within days and between days using a statistical
+test. Primarily, we wished to observe if there were any general trends
+with our response variables "in general" depending on the time of day or
+day the study was conducted. To do this, we elected to perform a series
+of Augmented Dickey-Fuller (ADF) tests on our three response variables
+(Faith's PD, Shannon entropy, and number of observed features) to test
+the stationarity of the data (specifically, if the mean or variance of
+the three response variables changes throughout days or between days.)
+The results of the ADF tests on a within-day scale showed strong
+indication that throughout the day, regardless of the day the
+observation was measured or the individual identity of the lemur, the
+mean and variance of all three response variables remain stationary.
+While this is a crude analysis, it is good background information to
+have when examining the possible associations of time with gut
+microbiome patterns when considering other predictors. All of the ADF
+tests were performed with a k-lag value of 25.
+
+```{r}
+df1 <- df[order(df$minutes_after_6am), ]
+ts_data1 <- ts(df$faith_pd, frequency = 1) 
+adf_test1 <- adf.test(ts_data1, k = 25)
+
+df2 <- df[order(df$minutes_after_6am), ]
+ts_data2 <- ts(df$shannon_entropy, frequency = 1) 
+adf_test2 <- adf.test(ts_data2, k = 25)
+
+df3 <- df[order(df$minutes_after_6am), ]
+ts_data3 <- ts(df$observed_features, frequency = 1) 
+adf_test3 <- adf.test(ts_data3, k = 25)
+
+p_vals <- data.frame(Faith_PD = round(adf_test1$p.value, 3),
+                     Shannon_Entropy = round(adf_test2$p.value, 3), 
+                     Observed_Features = round(adf_test3$p.value, 3))
+
+kbl(p_vals, longtable=F, col.names = c("Faith's PD","Shannon Entropy","Observed Features"),
+    caption = "p-values for ADF Tests Within Days") %>%
+  kable_styling(latex_options = "HOLD_position")
+```
+
+We can see from **Table 1** that all of the p-values are significant
+using a significance level of $\alpha = 0.05$, indicating that across
+the board (meaning across all seasons and individual lemurs), the
+distributions of all three response variables remain fairly constant
+throughout the day.
+
+```{r}
+df1 <- df[order(df$day_number), ]
+ts_data1 <- ts(df$faith_pd, frequency = 1) 
+adf_test1 <- adf.test(ts_data1, k = 25)
+
+df2 <- df[order(df$day_number), ]
+ts_data2 <- ts(df$shannon_entropy, frequency = 1) 
+adf_test2 <- adf.test(ts_data2, k = 25)
+
+df3 <- df[order(df$day_number), ]
+ts_data3 <- ts(df$observed_features, frequency = 1) 
+adf_test3 <- adf.test(ts_data3, k = 25)
+
+p_vals <- data.frame(Faith_PD = round(adf_test1$p.value, 3),
+                     Shannon_Entropy = round(adf_test2$p.value, 3), 
+                     Observed_Features = round(adf_test3$p.value, 3))
+
+#knitr::kable(p_vals, col.names = c("Faith PD", "Shannon Entropy", "# Observed Features"),
+#             caption = "Augmented Dickey-Fuller Test p-values for Between Days")
+
+kbl(p_vals, longtable=F, col.names = c("Faith's PD","Shannon Entropy","Observed Features"),
+    caption = "p-values for ADF Tests Between Days") %>%
+  kable_styling(latex_options = "HOLD_position")
+```
+
+**Table 2** shows the results for the between-days ADF tests. As we can
+see, when not accounting for other predictors, the distributions of our
+three response variables between days are also deemed stationary by the
+ADF test when using a k-lag value of 25. This is interesting considering
+we saw different distributions for the three response variables across
+seasons (which is a large gap, or lag, in days) for the L. catta species
+during our exploratory data analysis. However, overall, the distribution
+of the three response variables across days appeared stationary. While
+the ADF tests show general stationarity of all three response variables
+during days and across days, the tests themselves fail to distinguish
+between the differences in gut microbiome distributions associated with
+a different individual identity, lemur enclosure, and/or season. Our
+models will take these predictors into account and attempt to discover
+if the time of the observation (fixed effect) is associated with
+differences in lemur gut microbiome patterns while accounting for the
+individual identity of the lemur (random effect). It is possible that
+the aggregated data over all lemurs used for the ADF tests does not
+fully capture potential stationarity of the response variables due to
+variation between lemurs, and our model will take this concern into
+account when implemented.
+
+### Between-Group Correlation
+
+To discover potential correlation between groups of lemurs, we chose to
+group the observations into 24 categories where each category indicates
+a specific lemur in one of the two seasons (this was done due to
+noticeable differences during exploratory data analysis involving L.
+catta lemurs between seasons). Using these groupings, we examined
+intraclass and interclass correlation of these groups using the
+intraclass correlation coefficient (ICC) and Spearman's correlation
+coefficient, respectively. Spearman's coefficient was selected to
+evaluate possible monotonic nonlinearity for the three response
+variables (i.e. nonlinear relationships between classes). The results of
+the ICC indicated that for Faith's Phylogenetic Diversity, there was
+significant correlation within groups; this lines up with the findings
+of **Figure 3**, since the distributions for that response variable
+appear more spread out than the other response variables. For the other
+two response variables, insignificant intraclass correlation was
+observed. The Spearman's correlation matrices for the 24 groups in all 3
+response variables did find a few instances of statistically significant
+correlation between the groups, but most of these supposed correlations
+were between groups involving two different lemurs (and often two
+different seasons). It is notable that after computing p-values to
+determine statistical significance of all of the pairwise correlations
+for the groups, Nikos and Sophia were the two lemurs that showed
+statistically significant correlation between the two groups involving
+themselves (e.g. when measuring the pairwise correlation of Faith's
+Phylogenetic Diversity scores, Nikos and Sophia were the only two lemurs
+to have significantly correlated response values across season). Both of
+these lemurs are L. catta lemurs, revealing that none of the P.
+coquereli lemurs exhibited statistically significant correlation of the
+response variables across seasons. While this is an indicator that the
+response variables being evaluated are correlated for these specific
+pairs of groups, the actual level of correlation for most pairs appears
+to be somewhat low (all of the off-diagonal pairwise correlations for
+all of the response variables were at or below an absolute correlation
+of 0.5).
+
+### Linear Mixed Effects Model
+
+To investigate the remaining fixed effects, which are time of day and
+season, we implement three separate linear mixed models, each focusing
+on one of the microbiome diversity metrics as response variable: Faith's
+phylogenetic diversity, Shannon entropy, and the number of observed
+features of the different bacteria in the fecal sample. We are motivated
+to use linear mixed models because this dataset contains dependent
+observations at the individual animal level--namely, a lemur's gut
+microbiome diversity at one time point can be associated with its gut
+microbiome diversity in the future--for which linear mixed models can be
+more suitable than using dummy variables to encode for each individual
+lemur. Therefore, in our linear mixed model, we treat individual
+identity of each lemur as our random effect. We decided to
+first build a base model including species as the fixed effect and
+individual identity of the lemur as random effect. This separation of
+random and fixed effects automatically addresses the issue of
+non-independent observations. The model can be specified as:
+
+$\begin{aligned}Y_{i} &= a_{i} + b_{i}*\text{Species} + \epsilon_{i} \\ a_{i} &= \alpha_0 + u_{i} \\ b_{i} &= \beta_0 + v_{i} \\ \epsilon_{i} &\sim~N(0, \sigma^2)\end{aligned}$
+
+Here we choose to only incorporate species as the fixed effect, since
+species and Group variables are correlated (social groups Beatrice,
+Gertrude and Gisela belong to P. coquereli lemurs whereas Alena, Sophia
+and Brigitta belong to L. catta lemurs), and incoporating a two-level
+species will make our model output look cleaner, especially after we
+expand the model to add more fixed effects terms. In the model, $a_i$
+indicates the random effect from each individual, with $\alpha_0$ being
+the mean for the reference species and the reference group, and
+$\beta_0$ being the change towards the mean for the specific level
+group, compared to the reference group. $\sigma^2$ refers to the
+within-individual-lemur variance, while between-lemur variance is broken
+down into $u_i$ and $v_i$. In addition, $u_i$ and $v_i$ are assumed, by
+convention, to have a bivariate normal distribution, with each centered
+around 0 with their own variance and covariance.
+
+To investigate potential associations of time of day and season with gut
+microbiome patterns, we will adopt a nested-model approach and add these
+two covariates on top of the base model. Our EDA scatter plots also
+suggest that the association due to species may be different across time
+of day and season, hence interaction terms between species/season and
+species/time of day are added as well. Our samples span from spring to
+summer, meaning season covariates will be two-level. We also decide to
+use two-level AM/PM categorization for time of day. Unlike in our EDA,
+we didn't choose *minutes after 6AM* to operationalize time of day.
+Doing so would automatically assume that the response has a monotonic
+increasing/decreasing association with time elapsed; as we will have a
+single coefficient estimate for time of day, and our EDA doesn't suggest
+the presence of a monotonic association, we decided to use this binary
+metric instead. Finally, we elected not to include the date in our model
+due to the fact that each individual lemur is always measured in a
+period of three consecutive days. Since there is a large time gap
+between the spring and summer measurements, including the day of the
+observation would hurt model interpretation more than it would help.
+
+Our nested model can therefore be specified as:
+
+$\begin{aligned}Y_{ij} &= a_{i} + b_{i}*\text{Species} + c_{i} * \text{AMPM} + d_{i} * \text{Season} + \epsilon_{ij} \\ a_{i} &= \alpha_0 + u_{i} \\ b_i &= \beta_0 + v_{i} \\ c_{i} &= c_0 + c_1*\text{Species} + k_{i} \\ d_{i} &= d_0 + d_1*\text{Species} + q_{i} \\ \epsilon_{ij} &\sim~N(0, \sigma^2)\end{aligned}$
+
+and the error terms associated with each term, namely
+$u_i, v_i, k_i, p_i$ are assumed to be multivariate normally distributed
+with mean centered at zero, and each has their own variance and
+covariance with other error terms.
+
+Then, we perform chi-square difference tests on the two models to
+investigate if there is a statistically significant improvement from our
+base model to our new model, with time of day and season included as new
+fixed effects.
+
+\newpage
+
+# Results
+
+### Linear Mixed Effects Model Output
+
+As described in our methodology, three separate linear mixed effects
+models are fitted for Shannon Entropy, observed features and Faith's
+Phylogenetic Diversity. The models are fitted using the `lme4` package
+in R.
+
+```{r include = FALSE}
+#Picking interested variables right now
+library(lme4)
+library(tidyverse)
+library(kableExtra)
+
+shit <- df %>% 
+  select(SampleID, species, Animal.ID, NHE, Group, season, Sampling.date, AMPM, Sampline.time, shannon_entropy, observed_features, faith_pd, minutes_after_6am)
+
+model.shannon.a <- lmer(shannon_entropy ~ species + (1 + species | Animal.ID), data = shit)
+
+model.features.a <- lmer(observed_features ~ species + (1 + species | Animal.ID), data = shit)
+
+model.faith.a <- lmer(faith_pd ~ species + (1 + species | Animal.ID), data = shit)
+base.row.names <- c("Intercept", "P.coquereli")
+```
+
+```{r}
+shannon.a.coef.df <- data.frame(coef(summary(model.shannon.a))) %>%
+  mutate_all(funs(round(., 3)))
+rownames(shannon.a.coef.df) <- base.row.names
+
+features.a.coef.df <- data.frame(coef(summary(model.features.a))) %>%
+  mutate_all(funs(round(., 3)))
+rownames(features.a.coef.df) <- base.row.names
+
+faith.a.coef.df <- data.frame(coef(summary(model.faith.a))) %>%
+  mutate_all(funs(round(., 3)))
+rownames(faith.a.coef.df) <- base.row.names
+
+kbl(shannon.a.coef.df, caption = 'Fixed Effects for Shannon Base Model') %>% 
+  kable_styling(latex_options = "HOLD_position")
+kbl(features.a.coef.df, caption = 'Fixed Effects for Features Base Model')  %>% 
+  kable_styling(latex_options = "HOLD_position")
+kbl(faith.a.coef.df, caption = 'Fixed Effects for Faith Base Model')  %>% 
+  kable_styling(latex_options = "HOLD_position")
+```
+
+**Table 3** shows the coefficients of the fixed effects for our base
+model, with species and individual identity of the lemur. As expected,
+lemur species is associated with changes in both observed features and
+phylogenetic diversity (both with $|t-value| > 2$) in the base model,
+while it is insignificant for Shannon Entropy. We can also draw
+conclusions on the variability within and between individual lemurs from
+the model output. Using our Shannon Entropy base model as an example,
+within-individual variance ($\sigma^2$) is 0.1, while between-lemur
+variance is only 0.04 ( $\sigma_{u_i}^2$). However, it is worth noting
+that the associated standard deviations for these variance estimations
+are quite large (0.22 and 0.29 respectively), so the interpretations for
+within-individual and between-individual variability for the three base
+models should be treated with caution.
+
+```{r, include=FALSE, eval=FALSE}
+#This is too long so I don't want to include this
+summary(model.shannon.a)
+```
+
+With the base model set up, we proceed to build three additional models
+with time of day, season, and interactions of time of day and season
+with species included. While we will interpret the Shannon Entropy model
+in detail, we will point out only the significant results in the
+observed features and phylogenetic diversity model (as they are all
+interpreted similarly). All models are interpreted controlling for the
+random effect from individuals to avoid repetition. For the observed
+features model, we recognized that the model would yield estimates that
+give trailing digits despite the response variable being integer-only.
+For the purpose of understanding trends of associations between
+explanatory variables of interest and the response variable, we believe
+it is still informative to interpret the estimated model coefficients.
+
+```{r, include=FALSE}
+model.shannon.b <- lmer(shannon_entropy ~ season + species + AMPM + species:AMPM + species:season + (season + species + AMPM | Animal.ID), data = shit)
+
+model.features.b <- lmer(observed_features ~ season + species + AMPM + species:AMPM + species:season + (season + species + AMPM | Animal.ID), data = shit)
+
+model.faith.b <- lmer(faith_pd ~ season + species + AMPM + species:AMPM + species:season + (season + species + AMPM | Animal.ID), data = shit)
+
+row.names <- c("Intercept", "Summer", "P.coquereli", "PM", "P.coquereli * PM", "P.coquereli * Summer")
+```
+
+```{r}
+shannon.b.coef.df <- data.frame(coef(summary(model.shannon.b))) %>%
+  mutate_all(funs(round(., 3)))
+rownames(shannon.b.coef.df) <- row.names
+kbl(shannon.b.coef.df, caption = 'Fixed Effects for Shannon Nested Model') %>%
+  kable_styling(latex_options = "HOLD_position")
+```
+
+```{r}
+features.b.coef.df <- data.frame(coef(summary(model.features.b))) %>%
+  mutate_all(funs(round(., 3)))
+rownames(features.b.coef.df) <- row.names
+kbl(features.b.coef.df, caption = 'Fixed Effects for Features Nested Model') %>%
+  kable_styling(latex_options = "HOLD_position", full_width = F)
+```
+
+```{r}
+faith.b.coef.df <- data.frame(coef(summary(model.faith.b))) %>%
+  mutate_all(funs(round(., 3)))
+rownames(faith.b.coef.df) <- row.names
+kbl(faith.b.coef.df, caption = 'Fixed Effects for Faith Nested Model')  %>% 
+  kable_styling(latex_options = "HOLD_position", full_width = F)
+```
+
+- $\hat{\alpha}_0 = 6.430$: We expect the Shannon Entropy mean for
+  L.catta species in the spring measured during the AM to be 6.430.
+
+- $\hat{\beta}_0 = 0.025$: We expect Shannon Entropy to be 0.025
+  higher on average for P. coquereli than L. catta, after controlling
+  for time of day and season.
+
+- $\hat{c}_0 = -0.154$: We expect Shannon Entropy to be 0.154 lower on
+  average in the PM than the AM, after controlling for species and
+  season.
+
+- $\hat{d}_0 = 0.252$: We expect Shannon Entropy for L. catta to be
+  0.252 higher on average in the summer than in the spring, after
+  controlling for time of day.
+
+- $\hat{c}_1 = 0.116$: For P. coquereli species, we expect Shannon
+  Entropy to be 0.116 higher on average when measured in the PM than
+  the AM, after controlling for season. In other words, the estimated
+  Shannon Entropy measured in PM for P. coquereli is on average
+  $|0.025 + 0.116 - 0.154| \approx 0.01$ lower than the Shannon
+  Entropy measured in PM for L. catta, controlling for season.
+
+- $\hat{d}_1 = -0.105$: For P. coquereli species, we expect Shannon
+  Entropy to be 0.105 lower on average when measured in summer than
+  the spring, after controlling for time of day. This means that, on
+  average, the estimated Shannon Entropy measured in summer for
+  P.coquereli is $|0.025 + 0.252 - 0.105| \approx 0.17$ higher than
+  the Shannon Entropy measured in summer for L. catta, controlling for
+  time of day.
+
+In our model with observed features as response variable, we noticed
+this interesting coefficient sign change compared to the shannon entropy
+model:
+
+- $\hat{\beta}_0 = -12.28$: The estimated observed features is 12.28
+  lower on average for P. coquereli than L. catta, after controlling
+  for time of day and season.
+
+In our model with Faith's PD as the response variable, we noticed these
+interesting coeffcient sign changes compared to the shannon entropy
+model:
+
+- $\hat{\beta}_0 = -2.37$: The estimated Faith's PD is 2.37 lower on
+  average for P. coquereli than L. catta, after controlling for time
+  of day and season.
+
+- $\hat{c}_0 = 0.28$: The estimated Faith's PD is 0.28 on average
+  higher in PM than AM, after controlling for species and season.
+
+- $\hat{c}_1 = -0.28$: For P. coquereli species, the estimated Faith's
+  PD is 0.28 lower when measured in PM than AM, after controlling for
+  season, which is similar in terms of magnitude to the association
+  described by $\hat{c}_0$. In other words, the estimated Faith's PD
+  measured in PM for P. coquereli is on average
+  $|-2.37 + 0.28 - 0.28| = 2.37$ lower than the Faith's PD measured in
+  PM for L. catta, controlling for season.
+
+Since our new models are nested model compared to our base model, which
+only includes species and individual lemur ID, we carried out a
+Chi-square difference test to see whether the new model performs
+significantly better than the base model.
+
+```{r, include=FALSE}
+anova(model.shannon.b, model.shannon.a, test = 'Chisq')
+anova(model.features.b, model.features.a, test = 'Chisq')
+anova(model.faith.b, model.faith.a, test = 'Chisq')
+```
+
+Judging from the p-values, we can conclude that our new models for all
+three response variables perform significantly better than the base
+model. All the three new models experience significant drops in AIC, BIC
+and deviance (except for the new shannon entropy model, which actually
+experiences a slight increase in BIC). Considering that BIC also
+penalize for overly complicated models, this comparison suggests
+evidence that the models with predictors other than species may be
+better at capturing underlying relationships within our current dataset.
+
+# Discussion
+
+### Linear Mixed Model Interpretation
+
+It's worth noting that the t values associated with the fixed effects in
+our new models are mostly between 1-2, and their p values are not
+provided with them as the underlying distribution for these fixed effect
+coefficients are unknown for a linear mixed effect model. Therefore, we
+can't conclude the significance of these individual effects from a
+traditional confidence level perspective; however, these fixed
+coefficients still suggest the trend of how response variable changes as
+our predictor varies. Our model diagnostics and interpretation can be
+found in the Appendix: overall, we didn't observe significant deviation
+that questions the choice of Linear Mixed Models as our inference tool
+for this report. It's also worth noting that we only have a total of 293
+observations for all 12 lemurs, with each lemur only accounting for
+twenty or so data points: it's likely that if more fecal samples were
+collected for these lemurs, we would have larger statistical power in
+determining our coefficients with reduced standard deviation, as their
+associated t values would be larger as well.
+
+In summary, we learned from the models that we would expect Shannon
+Entropy and Observed Features to go down on average when measured in
+later times of the day because of the negative association due to time
+of day, controlling for species and season. Comparing the two seasons,
+we would expect all three markers to be higher on average when measured
+in summer compared to spring, meaning the lemurs would have a more
+diverse and balanced gut microbiome overall in summer, controlling for
+species and time of day. In terms of the magnitude of coefficient
+values, association due to season is also the "strongest" variable in
+our Shannon Entropy and Observed Features Nested Models, after
+controlling for time of day and species. In the Result section, we also
+interpreted when we would expect P.coquereli to have a more
+proportionally balanced microbiome than L.catta on average, controlling
+for season. Our model estimates provide support for the potential value
+of investigating relevant biological factors in lemurs, as well as the
+environmental variables related to their habitats, which can vary with
+time of day and season. Such an inquiry may lead to a more comprehensive
+understanding of the complex relationship between these factors and the
+lemur microbiome.
+
+In future research, a valuable avenue to explore is geospatial analysis,
+which can provide critical insights into the interplay between the
+physical environment and lemur gut microbiome diversity. This analysis
+involves the use of geographic information systems (GIS) to map
+enclosure locations and assess the impact of landscape characteristics
+on microbiome composition. By considering factors such as elevation,
+vegetation type, and proximity to water sources, we can elucidate how
+specific geographic features may be linked to observed variations in
+microbial communities. The integration of geospatial analysis will
+enhance our understanding of the ecological factors influencing lemur
+health and microbiota, offering a more holistic view of their habitat
+and its microbial dynamics.
+
+\newpage
+
+# Appendix
+
+## Data Dictionary
+
+- **Shannon Entropy:** Describes the microbial evenness of the taken
+  sample - higher degrees of uniformity among the bacterial data is
+  associated with a higher Shannon Entropy
+- **Faith's Phylogenetic Diversity:** Describes the overall diversity
+  of the sample - similar to Shannon Entropy, the more uniform the
+  bacterial data appears, the more diverse the sample, and
+  consequently the higher the Faith's Phylogenetic Diversity Score
+- **Observed Features:** The number of different bacteria observed in
+  the taken sample
+
+Variables included in the random effects models are defined below:
+
+- **Season:** Defines the season the sample was taken in - either
+  spring or summer
+- **Animal.ID:** Defines the individual identity of the lemur via
+  their name - only 12 unique lemurs measured
+- **minutes_after_6am:** Defines the number of minutes after 6AM the
+  sample was taken on the given day
+- **AMPM:** Defines the two time categories derived from
+  minutes_after_6am - AM (6:00am-11:59am) and PM (12:00pm-6:20pm)
+- **Species:** Defines the species of the sampled lemur - either L.
+  catta or P. coquereli
+
+## Methodology Test Information
+
+```{r}
+library(metaSEM)
+library(irr)
+library(tseries)
+library(dplyr)
+```
+
+```{r}
+seasons <- sort(unique(df$lemur_season))
+
+# Initialize a list to store the data for each matrix
+faith_pd_list <- list()
+shannon_entropy_list <- list()
+observed_features_list <- list()
+
+# Iterate through each 'lemur_season' category
+for (season1 in seasons) {
+  # Subset the data for the current season
+  subset_data <- df %>% filter(lemur_season == season1)
+  
+  # Extract and store the vectors of values
+  faith_pd_list[[season1]] <- subset_data$faith_pd
+  shannon_entropy_list[[season1]] <- subset_data$shannon_entropy
+  observed_features_list[[season1]] <- subset_data$observed_features
+}
+
+# Convert the lists into matrices
+faith_pd_matrix <- do.call(rbind, faith_pd_list)
+shannon_entropy_matrix <- do.call(rbind, shannon_entropy_list)
+observed_features_matrix <- do.call(rbind, observed_features_list)
+```
+
+```{r}
+faith_cor <- matrix(nrow = 24, ncol = 24)
+shannon_cor <- matrix(nrow = 24, ncol = 24)
+observed_cor <- matrix(nrow = 24, ncol = 24)
+faith_cor_p <- matrix(nrow = 24, ncol = 24)
+shannon_cor_p <- matrix(nrow = 24, ncol = 24)
+observed_cor_p <- matrix(nrow = 24, ncol = 24)
+
+for(i in 1:24) {
+  for(j in 1:24) {
+    faith_cor[i,j] <- cor(faith_pd_matrix[i,],faith_pd_matrix[j,],method="spearman")
+    shannon_cor[i,j] <- cor(shannon_entropy_matrix[i,],shannon_entropy_matrix[j,], method = "spearman")
+    observed_cor[i,j] <- cor(observed_features_matrix[i,],observed_features_matrix[j,], method = "spearman")
+  }
+}
+
+for(i in 1:24) {
+  for(j in 1:24) {
+    faith_cor_p[i,j] <- cor.test(faith_pd_matrix[i,],faith_pd_matrix[j,],
+                               alternative = "two.sided",
+                               method = "spearman")$p.value
+    shannon_cor_p[i,j] <- cor.test(shannon_entropy_matrix[i,],shannon_entropy_matrix[j,],
+                               alternative = "two.sided",
+                               method = "spearman")$p.value
+    observed_cor_p[i,j] <- cor.test(observed_features_matrix[i,],observed_features_matrix[j,],
+                               alternative = "two.sided",
+                               method = "spearman")$p.value
+  }
+}
+
+significant_corrs <- data.frame()
+
+names <- list("Alena spring",    "Alena summer" ,   "Beatrice spring", "Beatrice summer", "Brigitta spring", "Brigitta summer",
+ "Elliot spring",   "Elliot summer",   "Gertrude spring", "Gertrude summer", "Gisela spring",   "Gisela summer",  
+"Nikos spring",    "Nikos summer",    "Randy spring",    "Randy summer",    "Remus spring",    "Remus summer",   
+ "Rupert spring",   "Rupert summer",   "Sophia spring",   "Sophia summer",   "Stewart spring",  "Stewart summer")
+
+for(i in 1:24) {
+  for(j in 1:24) {
+    if(i < j & faith_cor_p[i,j] < 0.05) {
+      significant_corrs <- rbind(significant_corrs, list(i,j, faith_cor_p[i,j]))
+    }
+  }
+}
+
+for(i in 1:nrow(significant_corrs)) {
+  for(j in 1:2) {
+    significant_corrs[i,j] <- names[as.numeric(significant_corrs[i,j])]
+  }
+}
+
+kable(significant_corrs, col.names = c("Pair 1", "Pair 2", "Correlation"), caption = "Significant Correlation Between Groups (Faith PD)", digits = 4) %>%
+  kable_styling(latex_options = "HOLD_position", full_width = F)
+```
+
+```{r}
+significant_corrs <- data.frame()
+for(i in 1:24) {
+  for(j in 1:24) {
+    if(i < j & shannon_cor_p[i,j] < 0.05) {
+      significant_corrs <- rbind(significant_corrs, list(i,j, shannon_cor_p[i,j]))
+    }
+  }
+}
+
+for(i in 1:nrow(significant_corrs)) {
+  for(j in 1:2) {
+    significant_corrs[i,j] <- names[as.numeric(significant_corrs[i,j])]
+  }
+}
+
+kable(significant_corrs, col.names = c("Pair 1", "Pair 2", "Correlation"), caption = "Significant Correlation Between Groups (Shannon Entropy)", digits = 4) %>%
+  kable_styling(latex_options = "HOLD_position", full_width = F)
+```
+
+```{r}
+significant_corrs <- data.frame()
+for(i in 1:24) {
+  for(j in 1:24) {
+    if(i < j & observed_cor_p[i,j] < 0.05) {
+      significant_corrs <- rbind(significant_corrs, list(i,j,observed_cor_p[i,j]))
+    }
+  }
+}
+
+for(i in 1:nrow(significant_corrs)) {
+  for(j in 1:2) {
+    significant_corrs[i,j] <- names[as.numeric(significant_corrs[i,j])]
+  }
+}
+
+kable(significant_corrs, col.names = c("Pair 1", "Pair 2", "Correlation"), caption = "Significant Correlation Between Groups (Observed Features)", digits = 4) %>%
+  kable_styling(latex_options = "HOLD_position", full_width = F)
+```
+
+We can see from the above graphs that although the correlation was
+deemed to be statistically significant between the two groups, none of
+the correlations between the (lemur, season) pairs are actually strong.
+In fact, we see next to no correlation between nearly all of the
+significant correlative pairs.
+
+## Model Diagnostics Plots
+
+Based on the plot where we graph residuals vs fitted value, there is no
+considerable sign of heteroscedasticity in both Shannon Entropy Model
+and Features Model. However, we did notice a slight fanning structure in
+the residual plot of Faith's PD Model.In terms of residual normality,
+although all three models have falling tails on both ends, there is no
+substantial deviation across all models.
+
+```{r residual-1, fig.pos = "!h"}
+plot(model.shannon.b, 
+     xlab = "Fitted Value", 
+     ylab = "Residuals", 
+     main = "Residual Diagnostic Plot for Shannon Entropy Model")
+```
+
+```{r residual-2, fig.pos = "!h"}
+plot(model.faith.b, 
+     xlab = "Fitted Value", 
+     ylab = "Residuals", 
+     main = "Residual Diagnostic Plot for Faith's PD Model")
+```
+
+```{r residual-3, fig.pos = "!h"}
+plot(model.features.b, 
+     xlab = "Fitted Value", 
+     ylab = "Residuals", 
+     main = "Residual Diagnostic Plot for Observed Features Model")
+```
+
+```{r qq-1, fig.pos = "!h"}
+qqnorm(resid(model.shannon.b), main = "QQ Plot for Shannon Entropy Model")
+qqline(resid(model.shannon.b))
+```
+
+```{r qq-2, fig.pos = "!h"}
+qqnorm(resid(model.features.b), main = "QQ Plot for Observed Features Model")
+qqline(resid(model.features.b))
+```
+
+```{r qq-3, fig.pos = "!h"}
+qqnorm(resid(model.faith.b), main = "QQ Plot for Faith's PD Model")
+qqline(resid(model.faith.b))
+```
+
+\newpage
+
+## Sources Cited
+
+1. <https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html>
+2. <https://www.amnh.org/exhibitions/permanent/human-origins/understanding-our-past/living-primates#>
+3. Bornbusch, S.L., Greene, L.K., Rahobilalaina, S. et al. *Gut
+   microbiota of ring-tailed lemurs (Lemur catta) vary across natural
+   and captive populations and correlate with environmental
+   microbiota.* anim microbiome 4, 29 (2022).
+   <https://doi.org/10.1186/s42523-022-00176-x>

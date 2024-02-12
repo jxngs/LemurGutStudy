@@ -1,0 +1,477 @@
+---
+title: "Plotting"
+output: pdf_document
+date: "2023-10-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries-setup, warning = F, message = F}
+library(tidyverse)
+library(showtext)
+library(ggtext)
+library(ggridges)
+
+df <- read_csv("data/lemurs.csv")
+font_add_google("DM Serif Display", "dm")
+showtext_auto()
+```
+
+# Exploratory Data Analysis
+
+## Shannon Entropy
+
+```{r echo=F,  fig.cap = "Distributions of Shannon Entropy by Species", fig.pos = "!h"}
+ggplot(data = df, aes(
+  x = shannon_entropy,
+  y = species,
+  fill = factor(after_stat(quantile))
+)) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE
+  ) +
+  scale_fill_manual(values = c("#FFF5E4", "#FFE3E1", "#FFD1D1", "#FF9494")) +
+  labs(title = "",
+       x = "Shannon Entropy") +
+  theme_ridges() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(hjust = 0.5), 
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    text = element_text(family = "dm")
+  )
+```
+
+```{r shan-ent, echo = F}
+new <- c("spring" = "Spring", "summer" = "Summer")
+
+ggplot(data = df, mapping = aes(x = minutes_after_6am,
+                                y = shannon_entropy,
+                                color = species)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se=F) +
+  geom_rect(aes(xmin= 0, xmax = 360,
+                ymin = 5, ymax = 7.5),
+            fill = 'red', alpha = 0.5, color = "red") +
+  facet_wrap(~season, labeller = labeller(season = new)) + 
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  labs(x = "Minutes after 6 AM",
+       y = "Shannon Entropy",
+       title = "Shannon Entropy Over Time by Season and Species",
+       color = "Species") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+
+  - Shows that L. catta tends to see higher Shannon Entropy than P. coquereli in the summer, but this is reversed in the spring. 
+
+## Faith PD
+
+```{r echo=F, fig.cap = "Distributions of Phylogenetic Diversity by Species", fig.pos = "!h"}
+ggplot(data = df, aes(
+  x = faith_pd,
+  y = species,
+  fill = factor(after_stat(quantile))
+)) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE
+  ) +
+  scale_fill_manual(values = c("#ffbaba", "#ff7b7b", "#ff5252", "#ff0000")) +
+  labs(title = "",
+       x = "Faith's Phylogenetic Diversity") +
+  theme_ridges() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(hjust = 0.5), 
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    text = element_text(family = "dm")
+  )
+```
+
+```{r faith-pd, echo = F}
+ggplot(data = df, mapping = aes(x = minutes_after_6am,
+                                y = faith_pd,
+                                color = species)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se=F) +
+  facet_wrap(~season, labeller = labeller(season = new)) + 
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  labs(x = "Minutes after 6 AM",
+       y = "Phylogenetic Diversity",
+       title = "Phylogenetic Diversity Over Time by Season and Species",
+       color = "Species") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+
+  - Shows that L. catta consistently has higher phylogenetic diversity than P. coquereli, with season seemingly having an insignificant impact.
+  
+## Observed Features
+
+```{r echo=F, fig.cap = "Distributions of Observed Features by Species", fig.pos = "!h"}
+ggplot(data = df, aes(
+  x = observed_features,
+  y = species,
+  fill = factor(after_stat(quantile))
+)) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE
+  ) +
+  scale_fill_manual(values = c("#E7FFCE", "#D8FFB1", "#B6DA9F", "#A8D38D")) +
+  labs(title = "",
+       x = "Number of Observed Features") +
+  theme_ridges() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(hjust = 0.5), 
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    text = element_text(family = "dm")
+  )
+```
+
+```{r obs-feat, echo = F}
+ggplot(data = df, mapping = aes(x = minutes_after_6am,
+                                y = observed_features,
+                                color = species)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se=F) +
+  facet_wrap(~season, labeller = labeller(season = new)) + 
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  labs(x = "Minutes after 6 AM",
+       y = "Observed Features",
+       title = "Observed Features Over Time by Season and Species",
+       color = "Species") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+
+  - Shows that L. catta consistently has more observed features than P. coquereli, but this difference seems to be significantly exacerbated in the summer, suggesting a seasonal impact.
+
+# Initial Exploration
+
+```{r init, echo = F}
+#Top microbiomes and their composition in each sample
+ggplot(df, aes(x = AMPM, y = shannon_entropy)) +
+  geom_boxplot()
+
+ggplot(df, aes(x = AMPM, y = faith_pd)) +
+  geom_boxplot()
+
+ggplot(df, aes(x = AMPM, y = observed_features)) +
+  geom_boxplot()
+
+hist(df$shannon_entropy)
+df.AM <- df %>% 
+  filter(AMPM == 'AM')
+df.PM <- df %>% 
+  filter(AMPM == 'PM')
+
+t.test(df.AM$shannon_entropy, df.PM$shannon_entropy)
+
+#By continuous time
+ggplot(df, aes(x = Sampline.time, y = shannon_entropy)) +
+  geom_point()
+
+ggplot(df, aes(x = Sampline.time, y = faith_pd)) +
+  geom_smooth()
+
+ggplot(df, aes(x = Sampline.time, y = observed_features)) +
+  geom_smooth()
+
+df$Sampling.date = as.Date(df$Sampling.date, format = "%d-%b-%Y")
+
+
+# Shannon Entropy by Species Over time 
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = Sampling.date, y = shannon_entropy, color = species)) + 
+  geom_point()
+
+
+# Shannon Entropy by Social Group Over time 
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = Sampling.date, y = shannon_entropy, color = Group)) + 
+  geom_point()
+
+# Faith PD by Species Over time 
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = Sampling.date, y = faith_pd, color = species)) + 
+  geom_point()
+
+
+# Faith PD by Social Group Over time 
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = Sampling.date, y = faith_pd, color = Group)) + 
+  geom_point()
+
+
+# Observed Features by Species Over time 
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = Sampling.date, y = observed_features, color = species)) + 
+  geom_point()
+
+
+# Observed Features by Social Group Over time 
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = Sampling.date, y = observed_features, color = Group)) + 
+  geom_point()
+
+# Faith's PD & Shannon Index by Social Group
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = shannon_entropy, y = faith_pd, color = Group)) + 
+  geom_point()
+
+# Faith's PD & Shannon Index by Species
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  mutate(Sampling.month = month(Sampling.date)) %>%
+  ggplot(aes(x = shannon_entropy, y = faith_pd, color = species)) + 
+  geom_point()
+
+# Box plot of observed features in Groups facet by Season fill by AMPM
+# Group can also be swapped out for species
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  ggplot(aes(x = Group, y = observed_features, fill = AMPM)) + 
+  geom_boxplot() + 
+  facet_wrap(~season)
+
+# Box plot of shannon entropy in Groups facet by Season fill by AMPM
+# Group can also be swapped out for species
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  ggplot(aes(x = Group, y = shannon_entropy, fill = AMPM)) + 
+  geom_boxplot() + 
+  facet_wrap(~season)
+
+# Box plot of faith PD in Groups facet by Season fill by AMPM
+# Group can also be swapped out for species
+df %>%
+  select(c(species, 
+           Animal.ID, 
+           Group, 
+           season, 
+           Sampling.date, 
+           AMPM, 
+           Sampline.time, 
+           shannon_entropy, 
+           observed_features, 
+           faith_pd)) %>%
+  ggplot(aes(x = Group, y = observed_features, fill = AMPM)) + 
+  geom_boxplot() + 
+  facet_wrap(~season)
+
+
+```
+```{r}
+df |>
+  filter(species == "L. catta") |>
+  select(starts_with("d__")) |>
+  summarise_all(mean, na.rm = TRUE) |>
+  pivot_longer(everything(), names_to = "Column", values_to = "Mean_Value") |>
+  arrange(Mean_Value) |>
+  View()
+```
+
+```{r}
+family_data <- df |>
+  pivot_longer(cols = contains("d__"), names_to = "Bacteria", values_to = "Value") |>
+  mutate(Family = str_extract(Bacteria, "(?<=f__)[^;]+")) |>
+  mutate(Family = if_else(is.na(Family), "Undefined", Family))
+```
+
+
+```{r message = F}
+catta_data <- family_data |>
+  filter(species == "L. catta") |>
+  group_by(SampleID, Family) |>
+  summarize(FamilySum = sum(Value)) |>
+  top_n(8) |>
+  ungroup() |>
+  count(Family) |>
+  mutate(PercInTop10Percent = n / nrow(df |> filter(species == "L. catta")),
+         Species = "L. catta") |>
+  arrange(desc(PercInTop10Percent))
+
+coquereli_data <- family_data |>
+  filter(species == "P. coquereli") |>
+  group_by(SampleID, Family) |>
+  summarize(FamilySum = sum(Value)) |>
+  top_n(8) |>
+  ungroup() |>
+  count(Family) |>
+  mutate(PercInTop10Percent = n / nrow(df |> filter(species == "P. coquereli")),
+         Species = "P. coquereli") |>
+  arrange(desc(PercInTop10Percent))
+```
+
+```{r}
+plot_order <- catta_data |>
+  full_join(coquereli_data, by = join_by(Family == Family)) |>
+  select(Family, PercInTop10Percent.x, PercInTop10Percent.y)
+
+plot_order[is.na(plot_order)] <- 0
+
+plot_order <- plot_order |>
+  mutate(Difference = abs(PercInTop10Percent.x - PercInTop10Percent.y)) |>
+  arrange(desc(Difference)) |>
+  slice(1:20)
+
+# family_plot <- plot_order |>
+#   pivot_longer(cols = contains("Perc"), names_to = "Species", values_to = "Value") |>
+#   mutate(Species = if_else(Species == "PercInTop10Percent.x", "L. catta", "P. coquereli"))
+
+plot_order$Family = factor(plot_order$Family)
+plot_order$Family <-
+  reorder(plot_order$Family, plot_order$Difference)
+
+ggplot(data = plot_order) +
+  geom_point(
+    aes(
+      x = PercInTop10Percent.x,
+      y = Family,
+      color = "L. catta"
+      ),
+    size = 2.5
+    ) +
+  geom_point(
+    aes(
+      x = PercInTop10Percent.y,
+      y = Family,
+      color = "P. coquereli"
+      ),
+    size = 2.5
+    ) +
+  geom_segment(
+    aes(
+      x = PercInTop10Percent.x,
+      xend = PercInTop10Percent.y,
+      y = Family,
+      yend = Family
+    ),
+    color = "black"
+  ) +
+  scale_color_manual(values = c("#3acadf", "#8a64d6")) +
+  scale_x_continuous(labels = scales::percent) +
+  labs(color = "Species", x = "Top 10% Prevalence") +
+  theme_bw() +
+  theme(text = element_text(family = "dm"))
+```
+

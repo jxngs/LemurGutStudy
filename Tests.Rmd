@@ -1,0 +1,208 @@
+---
+title: "Tests"
+output: pdf_document
+date: "2023-10-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(metaSEM)
+library(irr)
+library(tseries)
+```
+
+```{r}
+df1 <- df[order(df$minutes_after_6am), ]
+ts_data1 <- ts(df$faith_pd, frequency = 1) 
+adf_test1 <- adf.test(ts_data, k = 25)
+
+df2 <- df[order(df$minutes_after_6am), ]
+ts_data2 <- ts(df$shannon_entropy, frequency = 1) 
+adf_test2 <- adf.test(ts_data, k = 25)
+
+df3 <- df[order(df$minutes_after_6am), ]
+ts_data3 <- ts(df$observed_features, frequency = 1) 
+adf_test3 <- adf.test(ts_data, k = 25)
+```
+
+```{r adf-test-faith}
+source("clean.r",local = knitr::knit_global())
+df <- df[order(df$minutes_after_6am), ]
+
+ts_data <- ts(df$faith_pd, frequency = 1)  # Assuming data is not regularly sampled
+
+# ADF Test for stationarity with a custom lag order 'k'
+adf_test <- adf.test(ts_data, k = 25)  # Adjust 'k' as needed based on the data
+
+# Take first differences to make the data more stationary
+diff_data <- diff(ts_data, differences = 1)
+
+# ADF Test for stationarity on differenced data
+adf_diff_test <- adf.test(diff_data, k = 25)  # Adjust 'k' as needed based on the differenced data
+
+# Plot the differenced time series data
+ggplot(data = data.frame(minutes_after_6am = df$minutes_after_6am, response = ts_data),
+       aes(x = minutes_after_6am, y = response)) +
+  geom_line() +
+  geom_hline(aes(yintercept = mean(df$faith_pd), color = 'red')) +
+  labs(title = "Within Day Time Series Plot",
+       x = "Minutes After 6pm",
+       y = "Response Variable (Differenced)")
+
+# Print the ADF test results for both the original and differenced data
+print("ADF Test for Original Data:")
+print(adf_test)
+print("ADF Test for Differenced Data:")
+print(adf_diff_test)
+
+```
+
+```{r adf-observed}
+df <- df[order(df$minutes_after_6am), ]
+
+ts_data <- ts(df$observed_features, frequency = 1)  # Assuming data is not regularly sampled
+
+# ADF Test for stationarity with a custom lag order 'k'
+adf_test <- adf.test(ts_data, k = 25)  # Adjust 'k' as needed based on the data
+
+# Take first differences to make the data more stationary
+diff_data <- diff(ts_data, differences = 1)
+
+# ADF Test for stationarity on differenced data
+adf_diff_test <- adf.test(diff_data, k = 25)  # Adjust 'k' as needed based on the differenced data
+
+# Plot the differenced time series data
+ggplot(data = data.frame(minutes_after_6am = df$minutes_after_6am, response = ts_data),
+       aes(x = minutes_after_6am, y = response)) +
+  geom_line() +
+  geom_hline(aes(yintercept = mean(df$observed_features), color = 'red')) +
+  labs(title = "Within Day Time Series Plot",
+       x = "Minutes After 6pm",
+       y = "Response Variable (Differenced)")
+
+# Print the ADF test results for both the original and differenced data
+print("ADF Test for Original Data:")
+print(adf_test)
+print("ADF Test for Differenced Data:")
+print(adf_diff_test)
+```
+
+```{r adf-shannon}
+df <- df[order(df$minutes_after_6am), ]
+
+ts_data <- ts(df$shannon_entropy, frequency = 1)  # Assuming data is not regularly sampled
+
+adf_test <- adf.test(ts_data, k = 25)
+
+diff_data <- diff(ts_data, differences = 1)
+
+adf_diff_test <- adf.test(diff_data, k = 25)
+
+ggplot(data = data.frame(minutes_after_6am = df$minutes_after_6am, response = ts_data),
+       aes(x = minutes_after_6am, y = response)) +
+  geom_line() +
+  geom_hline(aes(yintercept = mean(df$shannon_entropy), color = 'red')) +
+  labs(title = "Augmented Dickey-Fuller Test",
+       subtitle = "For response variable Shannon entropy",
+       x = "Minutes After 6pm",
+       y = "Shannon Entropy")
+
+print("ADF Test for Original Data:")
+print(adf_test)
+print("ADF Test for Differenced Data:")
+print(adf_diff_test)
+```
+
+```{r}
+library(psych)
+# Load the necessary library
+library(dplyr)
+
+# Assuming your data frame is named 'df' with columns 'lemur_season', 'faith_pd', 'shannon_entropy', and 'observed_features'
+
+# Get unique 'lemur_season' categories
+seasons <- sort(unique(df$lemur_season))
+
+# Initialize a list to store the data for each matrix
+faith_pd_list <- list()
+shannon_entropy_list <- list()
+observed_features_list <- list()
+
+# Iterate through each 'lemur_season' category
+for (season1 in seasons) {
+  # Subset the data for the current season
+  subset_data <- df %>% filter(lemur_season == season1)
+  
+  # Extract and store the vectors of values
+  faith_pd_list[[season1]] <- subset_data$faith_pd
+  shannon_entropy_list[[season1]] <- subset_data$shannon_entropy
+  observed_features_list[[season1]] <- subset_data$observed_features
+}
+
+# Convert the lists into matrices
+faith_pd_matrix <- do.call(rbind, faith_pd_list)
+shannon_entropy_matrix <- do.call(rbind, shannon_entropy_list)
+observed_features_matrix <- do.call(rbind, observed_features_list)
+```
+
+```{r}
+ICC(faith_pd_matrix)
+```
+
+```{r}
+ICC(shannon_entropy_matrix)
+```
+
+```{r}
+ICC(observed_features_matrix)
+```
+
+```{r pearson-cor, warning=FALSE}
+
+faith_cor <- matrix(nrow = 24, ncol = 24)
+shannon_cor <- matrix(nrow = 24, ncol = 24)
+observed_cor <- matrix(nrow = 24, ncol = 24)
+faith_cor_p <- matrix(nrow = 24, ncol = 24)
+shannon_cor_p <- matrix(nrow = 24, ncol = 24)
+observed_cor_p <- matrix(nrow = 24, ncol = 24)
+
+for(i in 1:24) {
+  for(j in 1:24) {
+    faith_cor[i,j] <- cor(faith_pd_matrix[i,],faith_pd_matrix[j,],method="spearman")
+    shannon_cor[i,j] <- cor(shannon_entropy_matrix[i,],shannon_entropy_matrix[j,], method = "spearman")
+    observed_cor[i,j] <- cor(observed_features_matrix[i,],observed_features_matrix[j,], method = "spearman")
+  }
+}
+
+for(i in 1:24) {
+  for(j in 1:24) {
+    faith_cor_p[i,j] <- cor.test(faith_pd_matrix[i,],faith_pd_matrix[j,],
+                               alternative = "two.sided",
+                               method = "spearman")$p.value
+    shannon_cor_p[i,j] <- cor.test(shannon_entropy_matrix[i,],shannon_entropy_matrix[j,],
+                               alternative = "two.sided",
+                               method = "spearman")$p.value
+    observed_cor_p[i,j] <- cor.test(observed_features_matrix[i,],observed_features_matrix[j,],
+                               alternative = "two.sided",
+                               method = "spearman")$p.value
+  }
+}
+
+significant_corrs <- data.frame(nrow = 0, ncol = 2)
+
+for(i in 1:24) {
+  for(j in 1:24) {
+    if(i < j & faith_cor_p[i,j] < 0.05) {
+      significant_corrs <- rbind(significant_corrs, list(i,j))
+    }
+  }
+}
+
+print(significant_corrs[-1,])
+
+print(faith_cor)
+#print(faith_cor_p)
+```
+

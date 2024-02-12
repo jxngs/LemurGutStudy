@@ -1,0 +1,11 @@
+This research explores lemur gut microbiome patterns across days and seasons, 
+addressing questions of variation and influential predictors. Despite non-independent 
+observations, a robust linear mixed effects model is employed, treating individual 
+lemur identity as a random effect. Augmented Dickey-Fuller tests reveal stationary 
+microbiome patterns within and between days. Group correlation analyses highlight 
+significant intraclass correlation for Faith's Phylogenetic Diversity. A nested 
+linear mixed model investigates fixed effects of species, time of day, and season, 
+with interaction terms. The study aims to discern associations between these 
+factors and lemur gut microbiome patterns. Chi-square difference tests assess 
+model improvements, providing a comprehensive analysis of the complex interplay 
+of biological and environmental factors influencing lemur gut microbiomes.

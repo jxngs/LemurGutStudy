@@ -1,0 +1,294 @@
+SampleID	BarcodeSequence	LinkerPrimerSequence	BarcodePlate	Well	Plate	species	Animal ID	NHE	Group	season	lemur_season	Sampling date	AMPM	Sampline time	kit	Description
+NHE136	TCCATTTCATGC	GTGTGYCAGCMGCCGCGGTAA	14	D3	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	18-Jun-20	AM	1009	powersoil	NHE136
+NHE137	TAGTTACTAGTT	GTGTGYCAGCMGCCGCGGTAA	14	D4	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	18-Jun-20	PM	1451	powersoil	NHE137
+NHE145	ACTTACGCCACG	GTGTGYCAGCMGCCGCGGTAA	14	D12	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	19-Jun-20	PM	1604	powersoil	NHE145
+NHE151A	GTGCTCTGTGCC	GTGTGYCAGCMGCCGCGGTAA	14	E6	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	20-Jun-20	AM	1019	powersoil	NHE151A
+NHE216	GGAGATTGGAGA	GTGTGYCAGCMGCCGCGGTAA	16	B2	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	23-Aug-20	AM	910	powersoil	NHE216
+NHE220	ACTTTAAGGGTG	GTGTGYCAGCMGCCGCGGTAA	16	B3	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	23-Aug-20	AM	1118	powersoil	NHE220
+NHE225	TGGCCAGGCAGC	GTGTGYCAGCMGCCGCGGTAA	16	B5	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	23-Aug-20	PM	1642	powersoil	NHE225
+NHE028	GCAGGGTCGAAC	GTGTGYCAGCMGCCGCGGTAA	10	C4	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	13-May-20	AM	1005	powersoil	NHE028
+NHE036	GGTGACTAGTTC	GTGTGYCAGCMGCCGCGGTAA	10	C12	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	14-May-20	AM	801	powersoil	NHE036
+NHE042	CATAATCTTGCT	GTGTGYCAGCMGCCGCGGTAA	10	D6	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	14-May-20	PM	1205	powersoil	NHE042
+NHE047	GACTATAATGGC	GTGTGYCAGCMGCCGCGGTAA	10	D11	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	15-May-20	AM	906	powersoil	NHE047
+NHE334	CGTTGACACCCA	GTGTGYCAGCMGCCGCGGTAA	16	G11	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	13-Sep-20	AM	942	powersoil	NHE334
+NHE338	ATAACCATAGGA	GTGTGYCAGCMGCCGCGGTAA	16	H1	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	13-Sep-20	PM	1502	powersoil	NHE338
+NHE341	GAATGGATGGGC	GTGTGYCAGCMGCCGCGGTAA	16	H3	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	13-Sep-20	PM	1720	powersoil	NHE341
+NHE343	GGTAGACCGGGT	GTGTGYCAGCMGCCGCGGTAA	16	H4	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	14-Sep-20	AM	904	powersoil	NHE343
+NHE345	AGAGTAAGCCGG	GTGTGYCAGCMGCCGCGGTAA	16	H6	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	14-Sep-20	AM	924	powersoil	NHE345
+NHE349	TGAAGCACACTA	GTGTGYCAGCMGCCGCGGTAA	16	H8	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	14-Sep-20	PM	1444	powersoil	NHE349
+NHE351	GTCGGAAATTGT	GTGTGYCAGCMGCCGCGGTAA	16	H10	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	14-Sep-20	PM	1525	powersoil	NHE351
+NHE354	ATGTGTGTAGAC	GTGTGYCAGCMGCCGCGGTAA	16	H11	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	14-Sep-20	PM	1609	powersoil	NHE354
+NHE363	TCCCTCTGAGAG	GTGTGYCAGCMGCCGCGGTAA	17	A1	4	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	15-Sep-20	AM	1028	powersoil	NHE363
+NHE366	CGATACACTGCC	GTGTGYCAGCMGCCGCGGTAA	17	A4	4	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	15-Sep-20	AM	1119	powersoil	NHE366
+NHE370	GAGTGCTCTAAC	GTGTGYCAGCMGCCGCGGTAA	17	A8	4	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	15-Sep-20	PM	1523	powersoil	NHE370
+NHE058	GCCTGCAGTACT	GTGTGYCAGCMGCCGCGGTAA	10	E10	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	23-May-20	AM	802	powersoil	NHE058
+NHE067	GCACATAGTCGT	GTGTGYCAGCMGCCGCGGTAA	10	F7	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	24-May-20	PM	1518	powersoil	NHE067
+NHE071	ATGTCCGACCAA	GTGTGYCAGCMGCCGCGGTAA	10	F11	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	25-May-20	AM	1103	powersoil	NHE071
+NHE072	ATTTCGACCCGG	GTGTGYCAGCMGCCGCGGTAA	10	F12	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	25-May-20	PM	1620	powersoil	NHE072
+NHE154	AGTACTGCCTGC	GTGTGYCAGCMGCCGCGGTAA	14	E10	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	AM	714	powersoil	NHE154
+NHE165	GACGATCGGGCC	GTGTGYCAGCMGCCGCGGTAA	14	F9	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	11-Aug-20	AM	710	powersoil	NHE165
+NHE184	GTGGATAAACTC	GTGTGYCAGCMGCCGCGGTAA	14	H4	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	12-Aug-20	PM	1637	powersoil	NHE184
+NHE041	GTATTATGACTT	GTGTGYCAGCMGCCGCGGTAA	10	D5	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	14-May-20	PM	1205	powersoil	NHE041
+NHE044	ACTATATTAGCT	GTGTGYCAGCMGCCGCGGTAA	10	D8	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	14-May-20	PM	1630	powersoil	NHE044
+NHE045	TTCTGGTCTTGT	GTGTGYCAGCMGCCGCGGTAA	10	D9	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	14-May-20	PM	1706	powersoil	NHE045
+NHE050	AGGAAAGCCAGA	GTGTGYCAGCMGCCGCGGTAA	10	E2	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	15-May-20	AM	1017	powersoil	NHE050
+NHE333	CATGCGGATCCT	GTGTGYCAGCMGCCGCGGTAA	16	G10	3	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	13-Sep-20	AM	929	powersoil	NHE333
+NHE359	TAACGAATAGAA	GTGTGYCAGCMGCCGCGGTAA	16	H12	3	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	15-Sep-20	AM	744	powersoil	NHE359
+NHE365	ATATCGCGATGA	GTGTGYCAGCMGCCGCGGTAA	17	A3	4	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	15-Sep-20	AM	1119	powersoil	NHE365
+NHE369	AACATTGCAGGT	GTGTGYCAGCMGCCGCGGTAA	17	A7	4	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	15-Sep-20	PM	1454	powersoil	NHE369
+NHE117	TCCGTATGCGCC	GTGTGYCAGCMGCCGCGGTAA	14	B8	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	10-Jun-20	PM	1400	powersoil	NHE117
+NHE118	AGGTTAAGTGCT	GTGTGYCAGCMGCCGCGGTAA	14	B9	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	10-Jun-20	PM	1624	powersoil	NHE118
+NHE119	GATTATCGACGA	GTGTGYCAGCMGCCGCGGTAA	14	B10	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	10-Jun-20	PM	1650	powersoil	NHE119
+NHE123	CACTTCTTTGTG	GTGTGYCAGCMGCCGCGGTAA	14	C2	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	11-Jun-20	AM	935	powersoil	NHE123
+NHE125	TAAACAATCAGG	GTGTGYCAGCMGCCGCGGTAA	14	C4	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	11-Jun-20	AM	1019	powersoil	NHE125
+NHE126	ACTAGACGACTA	GTGTGYCAGCMGCCGCGGTAA	14	C5	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	11-Jun-20	AM	1117	powersoil	NHE126
+NHE256	CAACCACTCGGT	GTGTGYCAGCMGCCGCGGTAA	16	C10	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	2-Sep-20	AM	833	powersoil	NHE256
+NHE261	TCGGTAGCAACT	GTGTGYCAGCMGCCGCGGTAA	16	D3	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	2-Sep-20	AM	1101	powersoil	NHE261
+NHE262	TTATCATTACGC	GTGTGYCAGCMGCCGCGGTAA	16	D4	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	2-Sep-20	PM	1431	powersoil	NHE262
+NHE277	CGCCTGCCAATA	GTGTGYCAGCMGCCGCGGTAA	16	E4	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	4-Sep-20	PM	1230	powersoil	NHE277
+NHE083	GTTCAACAGCTG	GTGTGYCAGCMGCCGCGGTAA	10	G10	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	3-Jun-20	PM	1421	powersoil	NHE083
+NHE089	TGTGATCTTTAC	GTGTGYCAGCMGCCGCGGTAA	10	H4	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	4-Jun-20	PM	1435	powersoil	NHE089
+NHE092	CGACCGGTGAAG	GTGTGYCAGCMGCCGCGGTAA	10	H7	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	4-Jun-20	PM	1614	powersoil	NHE092
+NHE096	TGCCCTCCGTAG	GTGTGYCAGCMGCCGCGGTAA	10	H11	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	5-Jun-20	PM	1328	powersoil	NHE096
+NHE098	TCAGCCTCAGCC	GTGTGYCAGCMGCCGCGGTAA	14	A1	2	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	5-Jun-20	PM	1442	powersoil	NHE098
+NHE189	GAGCACGCACGC	GTGTGYCAGCMGCCGCGGTAA	14	H7	2	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	16-Aug-20	PM	1450	powersoil	NHE189
+NHE208	GAGCTTGGCGGA	GTGTGYCAGCMGCCGCGGTAA	16	A8	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	18-Aug-20	PM	1504	powersoil	NHE208
+NHE210	AGAGTGCTAATC	GTGTGYCAGCMGCCGCGGTAA	16	A10	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	18-Aug-20	PM	1637	powersoil	NHE210
+NHE059	ATGGTTCACCCG	GTGTGYCAGCMGCCGCGGTAA	10	E11	1	L. catta	Nikos	NHE5	Brigitta	spring	Nikos_spring	23-May-20	AM	819	powersoil	NHE059
+NHE172	ACCTAGCTAGTG	GTGTGYCAGCMGCCGCGGTAA	14	G4	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	11-Aug-20	PM	1505	powersoil	NHE172
+NHE181	ATCTAAGTTACT	GTGTGYCAGCMGCCGCGGTAA	14	H1	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	12-Aug-20	PM	1214	powersoil	NHE181
+NHE007	ATGTGGCGTGTT	GTGTGYCAGCMGCCGCGGTAA	10	A7	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	4-May-20	PM	1421	powersoil	NHE007
+NHE012	GATTTAGAGGCT	GTGTGYCAGCMGCCGCGGTAA	10	A12	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	5-May-20	AM	950	powersoil	NHE012
+NHE312	GAGGGACGCAAT	GTGTGYCAGCMGCCGCGGTAA	16	F10	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	7-Sep-20	PM	1524	powersoil	NHE312
+NHE331	TCGTGCGTGTTG	GTGTGYCAGCMGCCGCGGTAA	16	G7	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	8-Sep-20	PM	1725	powersoil	NHE331
+NHE101	ATGGACCTAGCT	GTGTGYCAGCMGCCGCGGTAA	14	A4	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	9-Jun-20	AM	824	powersoil	NHE101
+NHE103	ACGGGCACGACA	GTGTGYCAGCMGCCGCGGTAA	14	A6	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	9-Jun-20	AM	1040	powersoil	NHE103
+NHE109	GCAGACGGAACC	GTGTGYCAGCMGCCGCGGTAA	14	A12	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	9-Jun-20	PM	1644	powersoil	NHE109
+NHE114	TATTAGCCTATC	GTGTGYCAGCMGCCGCGGTAA	14	B5	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	10-Jun-20	AM	837	powersoil	NHE114
+NHE120	GTCCCGTGAAAT	GTGTGYCAGCMGCCGCGGTAA	14	B11	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	10-Jun-20	PM	1653	powersoil	NHE120
+NHE122	ATGGAGTTGTTG	GTGTGYCAGCMGCCGCGGTAA	14	C1	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	11-Jun-20	AM	935	powersoil	NHE122
+NHE260	TTAACTGGAAGC	GTGTGYCAGCMGCCGCGGTAA	16	D2	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	2-Sep-20	AM	1053	powersoil	NHE260
+NHE282	GGATCCCAGGGA	GTGTGYCAGCMGCCGCGGTAA	16	E8	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	4-Sep-20	PM	1625	powersoil	NHE282
+NHE076	CATGTTGGAACA	GTGTGYCAGCMGCCGCGGTAA	10	G4	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	3-Jun-20	AM	911	powersoil	NHE076
+NHE082	CTGCAAGCCTGT	GTGTGYCAGCMGCCGCGGTAA	10	G9	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	3-Jun-20	PM	1334	powersoil	NHE082
+NHE094	GATGGCGGACTG	GTGTGYCAGCMGCCGCGGTAA	10	H9	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	5-Jun-20	AM	850	powersoil	NHE094
+NHE099	TGCAGGGAACCG	GTGTGYCAGCMGCCGCGGTAA	14	A2	2	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	5-Jun-20	PM	1442	powersoil	NHE099
+NHE204	ACCCTATTGCGG	GTGTGYCAGCMGCCGCGGTAA	16	A5	3	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	18-Aug-20	AM	1026	powersoil	NHE204
+NHE207	GGCGATTTACGT	GTGTGYCAGCMGCCGCGGTAA	16	A7	3	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	18-Aug-20	PM	1337	powersoil	NHE207
+NHE211	GTACCGTTGCAA	GTGTGYCAGCMGCCGCGGTAA	16	A11	3	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	18-Aug-20	PM	1637	powersoil	NHE211
+NHE008	AGACATACCGTA	GTGTGYCAGCMGCCGCGGTAA	10	A8	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	4-May-20	PM	1550	powersoil	NHE008
+NHE011	ACCTTCGCGCAC	GTGTGYCAGCMGCCGCGGTAA	10	A11	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	4-May-20	PM	1701	powersoil	NHE011
+NHE024	AACGCGAAATTC	GTGTGYCAGCMGCCGCGGTAA	10	B12	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	6-May-20	PM	1637	powersoil	NHE024
+NHE291	TACCCGACTAAG	GTGTGYCAGCMGCCGCGGTAA	16	F2	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	6-Sep-20	AM	1008	powersoil	NHE291
+NHE300	AGCATAGAAATA	GTGTGYCAGCMGCCGCGGTAA	16	F6	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	6-Sep-20	PM	1640	powersoil	NHE300
+NHE315	GCTCAATCAGAA	GTGTGYCAGCMGCCGCGGTAA	16	F11	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	7-Sep-20	PM	1640	powersoil	NHE315
+NHE330	CACAAAGCGATT	GTGTGYCAGCMGCCGCGGTAA	16	G8	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	8-Sep-20	PM	1720	powersoil	NHE330
+NHE131	CGGGCTTCATCA	GTGTGYCAGCMGCCGCGGTAA	14	C10	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	18-Jun-20	AM	635	powersoil	NHE131
+NHE135	TAGCGGAAGACG	GTGTGYCAGCMGCCGCGGTAA	14	D2	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	18-Jun-20	AM	1009	powersoil	NHE135
+NHE141	CAGCCGCATATC	GTGTGYCAGCMGCCGCGGTAA	14	D8	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	19-Jun-20	AM	842	powersoil	NHE141
+NHE143	AGTGACTGTCAA	GTGTGYCAGCMGCCGCGGTAA	14	D10	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	19-Jun-20	AM	930	powersoil	NHE143
+NHE144	CGTGTGTGCTCA	GTGTGYCAGCMGCCGCGGTAA	14	D11	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	19-Jun-20	PM	1431	powersoil	NHE144
+NHE146	GTAACCACCACC	GTGTGYCAGCMGCCGCGGTAA	14	E1	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	19-Jun-20	PM	1610	powersoil	NHE146
+NHE147	CTGTGTCCATGG	GTGTGYCAGCMGCCGCGGTAA	14	E2	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	20-Jun-20	AM	733	powersoil	NHE147
+NHE149	GACCGATAGGGA	GTGTGYCAGCMGCCGCGGTAA	14	E4	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	20-Jun-20	AM	818	powersoil	NHE149
+NHE222	GATTGGCATAGT	GTGTGYCAGCMGCCGCGGTAA	16	B4	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	23-Aug-20	PM	1424	powersoil	NHE222
+NHE228	CGTAATTGCCGC	GTGTGYCAGCMGCCGCGGTAA	16	B7	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	24-Aug-20	AM	831	powersoil	NHE228
+NHE229	TAGATCCTCGGA	GTGTGYCAGCMGCCGCGGTAA	16	B8	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	24-Aug-20	AM	919	powersoil	NHE229
+NHE241	TATAAGGACACA	GTGTGYCAGCMGCCGCGGTAA	16	C4	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	25-Aug-20	AM	754	powersoil	NHE241
+NHE132	TGCCATTAGAGC	GTGTGYCAGCMGCCGCGGTAA	14	C11	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	18-Jun-20	AM	704	powersoil pro	NHE132
+NHE133	CCGATCTCCGAC	GTGTGYCAGCMGCCGCGGTAA	14	C12	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	18-Jun-20	AM	809	powersoil pro	NHE133
+NHE138	TCACGCCGGAGG	GTGTGYCAGCMGCCGCGGTAA	14	D5	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	18-Jun-20	PM	1734	powersoil pro	NHE138
+NHE139	GGTCCGAAGCCG	GTGTGYCAGCMGCCGCGGTAA	14	D6	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	19-Jun-20	AM	620	powersoil pro	NHE139
+NHE142	GCGTCGGTACGG	GTGTGYCAGCMGCCGCGGTAA	14	D9	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	19-Jun-20	AM	842	powersoil pro	NHE142
+NHE148	TGAAGTCACAGT	GTGTGYCAGCMGCCGCGGTAA	14	E3	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	20-Jun-20	AM	733	powersoil pro	NHE148
+NHE151B	TAACACACTTAT	GTGTGYCAGCMGCCGCGGTAA	14	E7	2	L. catta	Alena	NHE2	Alena	spring	Alena_spring	20-Jun-20	PM	1511	powersoil pro	NHE151B
+NHE233	TAAGTCGGCCTA	GTGTGYCAGCMGCCGCGGTAA	16	B10	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	24-Aug-20	AM	1059	powersoil pro	NHE233
+NHE234	GTGTCACTTTAT	GTGTGYCAGCMGCCGCGGTAA	16	B11	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	24-Aug-20	PM	1540	powersoil pro	NHE234
+NHE240	AGTATTCGCGCA	GTGTGYCAGCMGCCGCGGTAA	16	C3	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	25-Aug-20	AM	704	powersoil pro	NHE240
+NHE248	ATTTATCCGGTT	GTGTGYCAGCMGCCGCGGTAA	16	C8	3	L. catta	Alena	NHE6	Alena	summer	Alena_summer	25-Aug-20	PM	1418	powersoil pro	NHE248
+NHE025	GTGAGCACGCAG	GTGTGYCAGCMGCCGCGGTAA	10	C1	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	13-May-20	AM	717	powersoil pro	NHE025
+NHE026	CGATCGAACACT	GTGTGYCAGCMGCCGCGGTAA	10	C2	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	13-May-20	AM	915	powersoil pro	NHE026
+NHE030	CAGGTAATAATG	GTGTGYCAGCMGCCGCGGTAA	10	C6	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	13-May-20	PM	1241	powersoil pro	NHE030
+NHE033	AAGCATTGAGAT	GTGTGYCAGCMGCCGCGGTAA	10	C9	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	13-May-20	PM	1620	powersoil pro	NHE033
+NHE035	ACCCTCAGCCCA	GTGTGYCAGCMGCCGCGGTAA	10	C11	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	13-May-20	PM	1700	powersoil pro	NHE035
+NHE038	AGCTGCACCTAA	GTGTGYCAGCMGCCGCGGTAA	10	D2	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	14-May-20	AM	830	powersoil pro	NHE038
+NHE040	CATGACGCCTCC	GTGTGYCAGCMGCCGCGGTAA	10	D4	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	14-May-20	AM	1019	powersoil pro	NHE040
+NHE043	TGCGTGGGTGGA	GTGTGYCAGCMGCCGCGGTAA	10	D7	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	14-May-20	PM	1330	powersoil pro	NHE043
+NHE046	TCCAGGGCTATA	GTGTGYCAGCMGCCGCGGTAA	10	D10	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	14-May-20	PM	1706	powersoil pro	NHE046
+NHE049	AATTGAATTTAC	GTGTGYCAGCMGCCGCGGTAA	10	E1	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	15-May-20	AM	1017	powersoil pro	NHE049
+NHE051	ATGGCTGTCAGT	GTGTGYCAGCMGCCGCGGTAA	10	E3	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	15-May-20	AM	1055	powersoil pro	NHE051
+NHE052	GAGGGTTGTCGG	GTGTGYCAGCMGCCGCGGTAA	10	E4	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	15-May-20	PM	1315	powersoil pro	NHE052
+NHE054	AGTAAGTCGATA	GTGTGYCAGCMGCCGCGGTAA	10	E6	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	15-May-20	PM	1553	powersoil pro	NHE054
+NHE055	TTGGGCCACATA	GTGTGYCAGCMGCCGCGGTAA	10	E7	1	P. coquereli	Beatrice	NHE6	Beatrice	spring	Beatrice_spring	15-May-20	PM	1702	powersoil pro	NHE055
+NHE332	ACGCATCGCACT	GTGTGYCAGCMGCCGCGGTAA	16	G9	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	13-Sep-20	AM	854	powersoil pro	NHE332
+NHE337	GCTTCCAGACAA	GTGTGYCAGCMGCCGCGGTAA	16	G12	3	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	13-Sep-20	AM	1125	powersoil pro	NHE337
+NHE367	TCACAACACCGC	GTGTGYCAGCMGCCGCGGTAA	17	A5	4	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	15-Sep-20	PM	1406	powersoil pro	NHE367
+NHE368	GTTTGTGATCTT	GTGTGYCAGCMGCCGCGGTAA	17	A6	4	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	15-Sep-20	PM	1454	powersoil pro	NHE368
+NHE373	GCTACTGGTATG	GTGTGYCAGCMGCCGCGGTAA	17	A9	4	P. coquereli	Beatrice	NHE6	Beatrice	summer	Beatrice_summer	15-Sep-20	PM	1644	powersoil pro	NHE373
+NHE057	ATACCTAAATAT	GTGTGYCAGCMGCCGCGGTAA	10	E9	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	23-May-20	AM	702	powersoil pro	NHE057
+NHE060	CCGTGGACCAGG	GTGTGYCAGCMGCCGCGGTAA	10	E12	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	23-May-20	AM	930	powersoil pro	NHE060
+NHE061	GTCCCTATTATC	GTGTGYCAGCMGCCGCGGTAA	10	F1	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	23-May-20	AM	1108	powersoil pro	NHE061
+NHE063	TGCGGTTGACTC	GTGTGYCAGCMGCCGCGGTAA	10	F3	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	23-May-20	PM	1402	powersoil pro	NHE063
+NHE065	CGACGAGATTAT	GTGTGYCAGCMGCCGCGGTAA	10	F5	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	24-May-20	AM	655	powersoil pro	NHE065
+NHE066	GCTACAAGCCCT	GTGTGYCAGCMGCCGCGGTAA	10	F6	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	24-May-20	AM	834	powersoil pro	NHE066
+NHE068	AGCCACCCGGGA	GTGTGYCAGCMGCCGCGGTAA	10	F8	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	25-May-20	AM	638	powersoil pro	NHE068
+NHE070	ACGCACATACAA	GTGTGYCAGCMGCCGCGGTAA	10	F10	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	25-May-20	AM	908	powersoil pro	NHE070
+NHE073	GGAGTTGAGGTG	GTGTGYCAGCMGCCGCGGTAA	10	G1	1	L. catta	Brigitta	NHE5	Brigitta	spring	Brigitta_spring	25-May-20	PM	1704	powersoil pro	NHE073
+NHE155	AGCTAAATGGAT	GTGTGYCAGCMGCCGCGGTAA	14	E11	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	AM	829	powersoil pro	NHE155
+NHE157	TCTATTGTTAGA	GTGTGYCAGCMGCCGCGGTAA	14	F1	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	AM	926	powersoil pro	NHE157
+NHE158	TCAATACAATAT	GTGTGYCAGCMGCCGCGGTAA	14	F2	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	AM	942	powersoil pro	NHE158
+NHE160	CATGTGCTTAGG	GTGTGYCAGCMGCCGCGGTAA	14	F4	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	AM	1101	powersoil pro	NHE160
+NHE161	TGACCTCAAGAC	GTGTGYCAGCMGCCGCGGTAA	14	F5	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	PM	1431	powersoil pro	NHE161
+NHE163	CTTGCATACCGG	GTGTGYCAGCMGCCGCGGTAA	14	F7	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	10-Aug-20	PM	1636	powersoil pro	NHE163
+NHE167	CATGGGTGTTAC	GTGTGYCAGCMGCCGCGGTAA	14	F11	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	11-Aug-20	AM	821	powersoil pro	NHE167
+NHE170	TCCTGAACACAG	GTGTGYCAGCMGCCGCGGTAA	14	G2	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	11-Aug-20	AM	944	powersoil pro	NHE170
+NHE173	CCAGTTCCAAAG	GTGTGYCAGCMGCCGCGGTAA	14	G5	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	11-Aug-20	PM	1542	powersoil pro	NHE173
+NHE174	CAGAGTGCCGGC	GTGTGYCAGCMGCCGCGGTAA	14	G6	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	12-Aug-20	AM	823	powersoil pro	NHE174
+NHE176	AGCAAGGTCTTC	GTGTGYCAGCMGCCGCGGTAA	14	G8	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	12-Aug-20	AM	904	powersoil pro	NHE176
+NHE178	AATGATAGATGC	GTGTGYCAGCMGCCGCGGTAA	14	G10	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	12-Aug-20	AM	1103	powersoil pro	NHE178
+NHE180	CTATGGTGAACC	GTGTGYCAGCMGCCGCGGTAA	14	G12	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	12-Aug-20	AM	1155	powersoil pro	NHE180
+NHE182	TCGGGTGAGGCC	GTGTGYCAGCMGCCGCGGTAA	14	H2	2	L. catta	Brigitta	NHE5	Brigitta	summer	Brigitta_summer	12-Aug-20	PM	1437	powersoil pro	NHE182
+NHE027	TTCGCTAACCTT	GTGTGYCAGCMGCCGCGGTAA	10	C3	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	13-May-20	AM	958	powersoil pro	NHE027
+NHE029	TAGAGGCGTAGG	GTGTGYCAGCMGCCGCGGTAA	10	C5	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	13-May-20	AM	1101	powersoil pro	NHE029
+NHE031	GCCGAACGCCGA	GTGTGYCAGCMGCCGCGGTAA	10	C7	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	13-May-20	PM	1440	powersoil pro	NHE031
+NHE032	GTCTAGTATTTC	GTGTGYCAGCMGCCGCGGTAA	10	C8	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	13-May-20	PM	1515	powersoil pro	NHE032
+NHE034	CCGCTGATGTCA	GTGTGYCAGCMGCCGCGGTAA	10	C10	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	13-May-20	PM	1700	powersoil pro	NHE034
+NHE037	CCGTCAAGATGT	GTGTGYCAGCMGCCGCGGTAA	10	D1	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	14-May-20	AM	801	powersoil pro	NHE037
+NHE039	GGAGTGCCCGAA	GTGTGYCAGCMGCCGCGGTAA	10	D3	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	14-May-20	AM	1019	powersoil pro	NHE039
+NHE048	ATCACCAGGTGT	GTGTGYCAGCMGCCGCGGTAA	10	D12	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	15-May-20	AM	939	powersoil pro	NHE048
+NHE053	CCACGTACGTAA	GTGTGYCAGCMGCCGCGGTAA	10	E5	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	15-May-20	PM	1406	powersoil pro	NHE053
+NHE056	TCTATCTGGCTT	GTGTGYCAGCMGCCGCGGTAA	10	E8	1	P. coquereli	Elliot	NHE6	Beatrice	spring	Elliot_spring	15-May-20	PM	1718	powersoil pro	NHE056
+NHE339	GCTGTCGTCAAC	GTGTGYCAGCMGCCGCGGTAA	16	H2	3	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	13-Sep-20	PM	1505	powersoil pro	NHE339
+NHE344	TGTCATGGCTGA	GTGTGYCAGCMGCCGCGGTAA	16	H5	3	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	14-Sep-20	AM	919	powersoil pro	NHE344
+NHE348	TCGCGCAACTGT	GTGTGYCAGCMGCCGCGGTAA	16	H7	3	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	14-Sep-20	PM	1406	powersoil pro	NHE348
+NHE350	ATCCACTCTATA	GTGTGYCAGCMGCCGCGGTAA	16	H9	3	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	14-Sep-20	PM	1444	powersoil pro	NHE350
+NHE364	GAAGACAGCGAC	GTGTGYCAGCMGCCGCGGTAA	17	A2	4	P. coquereli	Elliot	NHE6	Beatrice	summer	Elliot_summer	15-Sep-20	AM	1052	powersoil pro	NHE364
+NHE102	CTAGCCCGTTCG	GTGTGYCAGCMGCCGCGGTAA	14	A5	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	9-Jun-20	AM	942	powersoil pro	NHE102
+NHE104	TACGAGCCCTAA	GTGTGYCAGCMGCCGCGGTAA	14	A7	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	9-Jun-20	PM	1412	powersoil pro	NHE104
+NHE107	GAACAGCTCTAC	GTGTGYCAGCMGCCGCGGTAA	14	A10	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	9-Jun-20	PM	1451	powersoil pro	NHE107
+NHE108	GACGACATTTAG	GTGTGYCAGCMGCCGCGGTAA	14	A11	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	9-Jun-20	PM	1644	powersoil pro	NHE108
+NHE110	ATTGATATTGAT	GTGTGYCAGCMGCCGCGGTAA	14	B1	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	9-Jun-20	PM	1710	powersoil pro	NHE110
+NHE112	CGCCCGGGACAC	GTGTGYCAGCMGCCGCGGTAA	14	B3	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	10-Jun-20	AM	738	powersoil pro	NHE112
+NHE121	CTGACGATCCGT	GTGTGYCAGCMGCCGCGGTAA	14	B12	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	11-Jun-20	AM	840	powersoil pro	NHE121
+NHE128	CGCGTTCCCAGT	GTGTGYCAGCMGCCGCGGTAA	14	C7	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	11-Jun-20	PM	1242	powersoil pro	NHE128
+NHE130	GTATGGAGCTAT	GTGTGYCAGCMGCCGCGGTAA	14	C9	2	P. coquereli	Gertrude	NHE5	Gertrude	spring	Gertrude_spring	11-Jun-20	PM	1641	powersoil pro	NHE130
+NHE259	TCGCTGACTCGC	GTGTGYCAGCMGCCGCGGTAA	16	D1	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	2-Sep-20	AM	919	powersoil pro	NHE259
+NHE265	GGACTGGATGGC	GTGTGYCAGCMGCCGCGGTAA	16	D6	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	2-Sep-20	PM	1523	powersoil pro	NHE265
+NHE266	ACGTTTGTGGCA	GTGTGYCAGCMGCCGCGGTAA	16	D7	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	2-Sep-20	PM	1808	powersoil pro	NHE266
+NHE268	GCGCTCCTCCGT	GTGTGYCAGCMGCCGCGGTAA	16	D9	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	3-Sep-20	AM	827	powersoil pro	NHE268
+NHE272	CCTTGGAATCGC	GTGTGYCAGCMGCCGCGGTAA	16	D12	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	3-Sep-20	PM	1537	powersoil pro	NHE272
+NHE274	CTGAATCTGGTG	GTGTGYCAGCMGCCGCGGTAA	16	E1	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	3-Sep-20	PM	1703	powersoil pro	NHE274
+NHE276	GCGTGTAATTAG	GTGTGYCAGCMGCCGCGGTAA	16	E3	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	4-Sep-20	AM	732	powersoil pro	NHE276
+NHE280	ACAATGTCACAG	GTGTGYCAGCMGCCGCGGTAA	16	E6	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	4-Sep-20	PM	1609	powersoil pro	NHE280
+NHE283	ACCGGCCGTGCG	GTGTGYCAGCMGCCGCGGTAA	16	E9	3	P. coquereli	Gertrude	NHE5	Gertrude	summer	Gertrude_summer	4-Sep-20	PM	1623	powersoil pro	NHE283
+NHE074	GCGCAATAGTAT	GTGTGYCAGCMGCCGCGGTAA	10	G2	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	3-Jun-20	AM	756	powersoil pro	NHE074
+NHE077	ACCCGACGGGAC	GTGTGYCAGCMGCCGCGGTAA	10	G5	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	3-Jun-20	AM	914	powersoil pro	NHE077
+NHE078	AGGTCATCTTGG	GTGTGYCAGCMGCCGCGGTAA	10	G6	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	3-Jun-20	AM	1016	powersoil pro	NHE078
+NHE085	GCGAGCGAAGTA	GTGTGYCAGCMGCCGCGGTAA	10	G12	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	3-Jun-20	PM	1603	powersoil pro	NHE085
+NHE086	ATCTCTGGCGCC	GTGTGYCAGCMGCCGCGGTAA	10	H1	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	4-Jun-20	AM	1055	powersoil pro	NHE086
+NHE088	ACTTCATCGTAT	GTGTGYCAGCMGCCGCGGTAA	10	H3	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	4-Jun-20	PM	1413	powersoil pro	NHE088
+NHE093	CCTCTCGGGTTG	GTGTGYCAGCMGCCGCGGTAA	10	H8	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	5-Jun-20	AM	840	powersoil pro	NHE093
+NHE095	ATCTTGGAGTCG	GTGTGYCAGCMGCCGCGGTAA	10	H10	1	P. coquereli	Gisela	NHE2	Gisela	spring	Gisela_spring	5-Jun-20	AM	1150	powersoil pro	NHE095
+NHE188	GATTGAACGCTA	GTGTGYCAGCMGCCGCGGTAA	14	H6	2	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	16-Aug-20	PM	1039	powersoil pro	NHE188
+NHE191	CGGCTACTATGC	GTGTGYCAGCMGCCGCGGTAA	14	H8	2	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	17-Aug-20	AM	804	powersoil pro	NHE191
+NHE193	GACGAGGTCGGT	GTGTGYCAGCMGCCGCGGTAA	14	H10	2	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	17-Aug-20	AM	858	powersoil pro	NHE193
+NHE195	ACAAGGCAAGGC	GTGTGYCAGCMGCCGCGGTAA	14	H11	2	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	17-Aug-20	AM	1013	powersoil pro	NHE195
+NHE197	TACAAGTGGTCC	GTGTGYCAGCMGCCGCGGTAA	16	A1	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	17-Aug-20	PM	1356	powersoil pro	NHE197
+NHE200	ATACGCATCAAG	GTGTGYCAGCMGCCGCGGTAA	16	A3	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	17-Aug-20	PM	1711	powersoil pro	NHE200
+NHE201	GGCCTTCAGTCA	GTGTGYCAGCMGCCGCGGTAA	16	A4	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	17-Aug-20	PM	1720	powersoil pro	NHE201
+NHE205	AGAGAACACTTA	GTGTGYCAGCMGCCGCGGTAA	16	A6	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	18-Aug-20	AM	1110	powersoil pro	NHE205
+NHE212	TGCTTGTAGGCA	GTGTGYCAGCMGCCGCGGTAA	16	A12	3	P. coquereli	Gisela	NHE2	Gisela	summer	Gisela_summer	18-Aug-20	PM	1657	powersoil pro	NHE212
+NHE062	GCGACGCGGCAT	GTGTGYCAGCMGCCGCGGTAA	10	F2	1	L. catta	Nikos	NHE5	Brigitta	spring	Nikos_spring	23-May-20	AM	1108	powersoil pro	NHE062
+NHE069	ATGTCTTCAACT	GTGTGYCAGCMGCCGCGGTAA	10	F9	1	L. catta	Nikos	NHE5	Brigitta	spring	Nikos_spring	25-May-20	AM	700	powersoil pro	NHE069
+NHE156	AGTTACGAGCTA	GTGTGYCAGCMGCCGCGGTAA	14	E12	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	10-Aug-20	AM	830	powersoil pro	NHE156
+NHE159	GAATACCAAGTC	GTGTGYCAGCMGCCGCGGTAA	14	F3	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	10-Aug-20	AM	1044	powersoil pro	NHE159
+NHE162	GAACGTCCGGAG	GTGTGYCAGCMGCCGCGGTAA	14	F6	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	10-Aug-20	PM	1539	powersoil pro	NHE162
+NHE164	CTGTCCCGCAGT	GTGTGYCAGCMGCCGCGGTAA	14	F8	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	10-Aug-20	PM	1717	powersoil pro	NHE164
+NHE166	GGTTGTAAGTGT	GTGTGYCAGCMGCCGCGGTAA	14	F10	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	11-Aug-20	AM	718	powersoil pro	NHE166
+NHE168	GTGCATTCGCCA	GTGTGYCAGCMGCCGCGGTAA	14	F12	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	11-Aug-20	AM	824	powersoil pro	NHE168
+NHE169	CGATCCGATCTG	GTGTGYCAGCMGCCGCGGTAA	14	G1	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	11-Aug-20	AM	936	powersoil pro	NHE169
+NHE171	TAAACGCGACTC	GTGTGYCAGCMGCCGCGGTAA	14	G3	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	11-Aug-20	AM	1107	powersoil pro	NHE171
+NHE175	GGCCTGGCCTGG	GTGTGYCAGCMGCCGCGGTAA	14	G7	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	12-Aug-20	AM	823	powersoil pro	NHE175
+NHE177	TACCGGCTTGCA	GTGTGYCAGCMGCCGCGGTAA	14	G9	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	12-Aug-20	AM	908	powersoil pro	NHE177
+NHE179	AATCAACTAGGC	GTGTGYCAGCMGCCGCGGTAA	14	G11	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	12-Aug-20	AM	1144	powersoil pro	NHE179
+NHE183	ACGATCATCTGG	GTGTGYCAGCMGCCGCGGTAA	14	H3	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	12-Aug-20	PM	1440	powersoil pro	NHE183
+NHE185	CAAGAGCGGATG	GTGTGYCAGCMGCCGCGGTAA	14	H5	2	L. catta	Nikos	NHE5	Brigitta	summer	Nikos_summer	12-Aug-20	PM	1637	powersoil pro	NHE185
+NHE002	CCATATCCCGGA	GTGTGYCAGCMGCCGCGGTAA	10	A2	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	4-May-20	AM	720	powersoil pro	NHE002
+NHE004	TACCAATCGGTG	GTGTGYCAGCMGCCGCGGTAA	10	A4	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	4-May-20	AM	910	powersoil pro	NHE004
+NHE010	AGTGAAATACTG	GTGTGYCAGCMGCCGCGGTAA	10	A10	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	4-May-20	PM	1620	powersoil pro	NHE010
+NHE013	AAGGCTGGGCAC	GTGTGYCAGCMGCCGCGGTAA	10	B1	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	4-May-20	AM	1030	powersoil pro	NHE013
+NHE017	AGCCGACTCTGT	GTGTGYCAGCMGCCGCGGTAA	10	B5	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	5-May-20	PM	1650	powersoil pro	NHE017
+NHE019	CTCGAGCGTACT	GTGTGYCAGCMGCCGCGGTAA	10	B7	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	6-May-20	AM	834	powersoil pro	NHE019
+NHE020	GCTGTGATTCGA	GTGTGYCAGCMGCCGCGGTAA	10	B8	1	L. catta	Randy	NHE2	Sophia	spring	Randy_spring	6-May-20	AM	903	powersoil pro	NHE020
+NHE285	CTTAGAACGTGC	GTGTGYCAGCMGCCGCGGTAA	16	E11	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	6-Sep-20	AM	758	powersoil pro	NHE285
+NHE297	CGAGGACCCTGG	GTGTGYCAGCMGCCGCGGTAA	16	F4	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	6-Sep-20	PM	1432	powersoil pro	NHE297
+NHE303	TGACTCTGCGGT	GTGTGYCAGCMGCCGCGGTAA	16	F7	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	6-Sep-20	PM	1727	powersoil pro	NHE303
+NHE307	ATTTAGGACGAC	GTGTGYCAGCMGCCGCGGTAA	16	F8	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	7-Sep-20	AM	932	powersoil pro	NHE307
+NHE319	ACTCAATTCATC	GTGTGYCAGCMGCCGCGGTAA	16	G1	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	8-Sep-20	AM	840	powersoil pro	NHE319
+NHE321	TCCTGTGCGAGT	GTGTGYCAGCMGCCGCGGTAA	16	G3	3	L. catta	Randy	NHE2	Sophia	summer	Randy_summer	8-Sep-20	AM	1003	powersoil pro	NHE321
+NHE105	CAATGGTTTCTT	GTGTGYCAGCMGCCGCGGTAA	14	A8	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	9-Jun-20	PM	1419	powersoil pro	NHE105
+NHE106	ACCCAGTATGGT	GTGTGYCAGCMGCCGCGGTAA	14	A9	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	9-Jun-20	PM	1434	powersoil pro	NHE106
+NHE111	GACTGGAGATGG	GTGTGYCAGCMGCCGCGGTAA	14	B2	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	9-Jun-20	PM	1744	powersoil pro	NHE111
+NHE113	CGCTCTTAACGG	GTGTGYCAGCMGCCGCGGTAA	14	B4	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	10-Jun-20	AM	807	powersoil pro	NHE113
+NHE115	GTATTTCGGACG	GTGTGYCAGCMGCCGCGGTAA	14	B6	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	10-Jun-20	AM	932	powersoil pro	NHE115
+NHE116	ACTAGCGTTCAG	GTGTGYCAGCMGCCGCGGTAA	14	B7	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	10-Jun-20	AM	1017	powersoil pro	NHE116
+NHE124	CTCGGATAGATC	GTGTGYCAGCMGCCGCGGTAA	14	C3	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	11-Jun-20	AM	1019	powersoil pro	NHE124
+NHE127	GTAATGCGTAAC	GTGTGYCAGCMGCCGCGGTAA	14	C6	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	11-Jun-20	AM	1125	powersoil pro	NHE127
+NHE129	TGTACCAACCGA	GTGTGYCAGCMGCCGCGGTAA	14	C8	2	P. coquereli	Remus	NHE5	Gertrude	spring	Remus_spring	11-Jun-20	PM	1625	powersoil pro	NHE129
+NHE257	GTAGTCCCGCTC	GTGTGYCAGCMGCCGCGGTAA	16	C11	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	2-Sep-20	AM	839	powersoil pro	NHE257
+NHE258	TTCGTACTTCGT	GTGTGYCAGCMGCCGCGGTAA	16	C12	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	2-Sep-20	AM	902	powersoil pro	NHE258
+NHE263	TCAGCGCCGTTA	GTGTGYCAGCMGCCGCGGTAA	16	D5	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	2-Sep-20	PM	1519	powersoil pro	NHE263
+NHE267	CCTTAGTTTACA	GTGTGYCAGCMGCCGCGGTAA	16	D8	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	2-Sep-20	PM	1810	powersoil pro	NHE267
+NHE269	CAACCGAGATTA	GTGTGYCAGCMGCCGCGGTAA	16	D10	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	3-Sep-20	AM	945	powersoil pro	NHE269
+NHE270	GTCGCACGTCTC	GTGTGYCAGCMGCCGCGGTAA	16	D11	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	3-Sep-20	AM	1132	powersoil pro	NHE270
+NHE275	GCTTACGTAGGT	GTGTGYCAGCMGCCGCGGTAA	16	E2	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	3-Sep-20	PM	1712	powersoil pro	NHE275
+NHE279	CAGGTGCGCCGC	GTGTGYCAGCMGCCGCGGTAA	16	E5	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	4-Sep-20	PM	1246	powersoil pro	NHE279
+NHE284	TAGCCAATTTCT	GTGTGYCAGCMGCCGCGGTAA	16	E10	3	P. coquereli	Remus	NHE5	Gertrude	summer	Remus_summer	4-Sep-20	PM	1700	powersoil pro	NHE284
+NHE075	CACATATTGGGC	GTGTGYCAGCMGCCGCGGTAA	10	G3	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	3-Jun-20	AM	756	powersoil pro	NHE075
+NHE079	CTCTCGGCGTAA	GTGTGYCAGCMGCCGCGGTAA	10	G7	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	3-Jun-20	AM	1033	powersoil pro	NHE079
+NHE080	CGAGATAGTTTG	GTGTGYCAGCMGCCGCGGTAA	10	G8	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	3-Jun-20	PM	1312	powersoil pro	NHE080
+NHE084	CGTTTCAAGGAC	GTGTGYCAGCMGCCGCGGTAA	10	G11	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	3-Jun-20	PM	1603	powersoil pro	NHE084
+NHE087	AGACGACGTGGA	GTGTGYCAGCMGCCGCGGTAA	10	H2	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	4-Jun-20	AM	1110	powersoil pro	NHE087
+NHE090	TCCTCCGGTTGG	GTGTGYCAGCMGCCGCGGTAA	10	H5	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	4-Jun-20	PM	1441	powersoil pro	NHE090
+NHE091	AACTTCACTTCC	GTGTGYCAGCMGCCGCGGTAA	10	H6	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	4-Jun-20	PM	1605	powersoil pro	NHE091
+NHE097	GTTGTGGGCGCG	GTGTGYCAGCMGCCGCGGTAA	10	H12	1	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	5-Jun-20	PM	1330	powersoil pro	NHE097
+NHE100	CAGCGCGGCTAG	GTGTGYCAGCMGCCGCGGTAA	14	A3	2	P. coquereli	Rupert	NHE2	Gisela	spring	Rupert_spring	5-Jun-20	PM	1617	powersoil pro	NHE100
+NHE192	CAATACGACCGT	GTGTGYCAGCMGCCGCGGTAA	14	H9	2	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	17-Aug-20	AM	840	powersoil pro	NHE192
+NHE196	GCTATCAAGACA	GTGTGYCAGCMGCCGCGGTAA	14	H12	2	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	17-Aug-20	AM	1013	powersoil pro	NHE196
+NHE198	AACTCCTGTGGA	GTGTGYCAGCMGCCGCGGTAA	16	A2	3	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	13-Aug-20	PM	1356	powersoil pro	NHE198
+NHE209	ACAAGAACCTTG	GTGTGYCAGCMGCCGCGGTAA	16	A9	3	P. coquereli	Rupert	NHE2	Gisela	summer	Rupert_summer	18-Aug-20	PM	1504	powersoil pro	NHE209
+NHE001	TGTGTTACTCCT	GTGTGYCAGCMGCCGCGGTAA	10	A1	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	4-May-20	AM	720	powersoil pro	NHE001
+NHE003	TTGACGACATCG	GTGTGYCAGCMGCCGCGGTAA	10	A3	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	4-May-20	AM	910	powersoil pro	NHE003
+NHE005	ATCTGGACGATC	GTGTGYCAGCMGCCGCGGTAA	10	A5	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	4-May-20	AM	1021	powersoil pro	NHE005
+NHE006	ACTCGTGATAGC	GTGTGYCAGCMGCCGCGGTAA	10	A6	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	4-May-20	AM	1130	powersoil pro	NHE006
+NHE014	CGATAGGCCTTA	GTGTGYCAGCMGCCGCGGTAA	10	B2	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	5-May-20	PM	1306	powersoil pro	NHE014
+NHE015	TAAGATGCAGTC	GTGTGYCAGCMGCCGCGGTAA	10	B3	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	5-May-20	PM	1541	powersoil pro	NHE015
+NHE016	TCCGCAACCTGA	GTGTGYCAGCMGCCGCGGTAA	10	B4	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	5-May-20	PM	1627	powersoil pro	NHE016
+NHE018	GTGTTCCCAGAA	GTGTGYCAGCMGCCGCGGTAA	10	B6	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	6-May-20	AM	703	powersoil pro	NHE018
+NHE021	CTGCCCTCGATG	GTGTGYCAGCMGCCGCGGTAA	10	B9	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	6-May-20	PM	1235	powersoil pro	NHE021
+NHE022	TTGGGTACACGT	GTGTGYCAGCMGCCGCGGTAA	10	B10	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	6-May-20	PM	1518	powersoil pro	NHE022
+NHE023	GATATCGATGAA	GTGTGYCAGCMGCCGCGGTAA	10	B11	1	L. catta	Sophia	NHE2	Sophia	spring	Sophia_spring	6-May-20	PM	1600	powersoil pro	NHE023
+NHE286	GTAAGTAGATCA	GTGTGYCAGCMGCCGCGGTAA	16	E12	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	6-Sep-20	AM	758	powersoil pro	NHE286
+NHE289	TCGACGGAGAGA	GTGTGYCAGCMGCCGCGGTAA	16	F1	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	6-Sep-20	AM	912	powersoil pro	NHE289
+NHE296	ATTCCCAGAACG	GTGTGYCAGCMGCCGCGGTAA	16	F3	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	6-Sep-20	AM	1142	powersoil pro	NHE296
+NHE299	CCATAATCTTAC	GTGTGYCAGCMGCCGCGGTAA	16	F5	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	6-Sep-20	PM	1546	powersoil pro	NHE299
+NHE309	AATTAGGCGTGT	GTGTGYCAGCMGCCGCGGTAA	16	F9	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	7-Sep-20	AM	1029	powersoil pro	NHE309
+NHE318	CAGTTCGAGATA	GTGTGYCAGCMGCCGCGGTAA	16	F12	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	8-Sep-20	AM	838	powersoil pro	NHE318
+NHE320	TTGCAGTGCAAC	GTGTGYCAGCMGCCGCGGTAA	16	G2	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	8-Sep-20	AM	950	powersoil pro	NHE320
+NHE322	AGGAGTTGTATA	GTGTGYCAGCMGCCGCGGTAA	16	G4	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	8-Sep-20	AM	1040	powersoil pro	NHE322
+NHE326	CTATTCTTGGCT	GTGTGYCAGCMGCCGCGGTAA	16	G5	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	8-Sep-20	PM	1539	powersoil pro	NHE326
+NHE327	ATTCACGTATTC	GTGTGYCAGCMGCCGCGGTAA	16	G6	3	L. catta	Sophia	NHE2	Sophia	summer	Sophia_summer	8-Sep-20	PM	1637	powersoil pro	NHE327
+NHE134	GCAGCGGTGGCT	GTGTGYCAGCMGCCGCGGTAA	14	D1	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	18-Jun-20	AM	915	powersoil pro	NHE134
+NHE140	CCGGTCCGGGCA	GTGTGYCAGCMGCCGCGGTAA	14	D7	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	19-Jun-20	AM	743	powersoil pro	NHE140
+NHE150	GATGAGTCGCGG	GTGTGYCAGCMGCCGCGGTAA	14	E5	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	20-Jun-20	AM	929	powersoil pro	NHE150
+NHE152	GTGTTTAACTCT	GTGTGYCAGCMGCCGCGGTAA	14	E8	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	20-Jun-20	PM	1629	powersoil pro	NHE152
+NHE153	GCCCGACATATA	GTGTGYCAGCMGCCGCGGTAA	14	E9	2	L. catta	Stewart	NHE2	Alena	spring	Stewart_spring	20-Jun-20	PM	1647	powersoil pro	NHE153
+NHE215	ATGGAAGGTGGC	GTGTGYCAGCMGCCGCGGTAA	16	B1	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	23-Aug-20	AM	734	powersoil pro	NHE215
+NHE227	GTCATAAGAACC	GTGTGYCAGCMGCCGCGGTAA	16	B6	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	23-Aug-20	PM	1716	powersoil pro	NHE227
+NHE230	TGGGTTAACACA	GTGTGYCAGCMGCCGCGGTAA	16	B9	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	24-Aug-20	AM	945	powersoil pro	NHE230
+NHE235	GCTAAAGTCGTA	GTGTGYCAGCMGCCGCGGTAA	16	B12	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	24-Aug-20	PM	1540	powersoil pro	NHE235
+NHE238	GGCCATAGGCAG	GTGTGYCAGCMGCCGCGGTAA	16	C1	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	24-Aug-20	PM	1721	powersoil pro	NHE238
+NHE242	CACGTACACGTA	GTGTGYCAGCMGCCGCGGTAA	16	C5	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	25-Aug-20	AM	916	powersoil pro	NHE242
+NHE245	TCTCATGTGGAG	GTGTGYCAGCMGCCGCGGTAA	16	C6	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	25-Aug-20	AM	1032	powersoil pro	NHE245
+NHE247	TCTGTGTCTAAT	GTGTGYCAGCMGCCGCGGTAA	16	C7	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	25-Aug-20	PM	1412	powersoil pro	NHE247
+NHE253	CCGTTCAATGGA	GTGTGYCAGCMGCCGCGGTAA	16	C9	3	L. catta	Stewart	NHE6	Alena	summer	Stewart_summer	25-Aug-20	PM	1742	powersoil pro	NHE253
